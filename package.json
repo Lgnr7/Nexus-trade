@@ -2,10 +2,10 @@
   "name": "nexus-trade",
   "version": "5.0.0",
   "private": true,
-  "description": "Nexus Trade — hub de trading crypto : bot Kraken multi-paires, sniper Solana, risk manager et backtests.",
+  "description": "Nexus Trade \u2014 hub de trading crypto : bot Kraken multi-paires, sniper Solana, risk manager et backtests.",
   "type": "module",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20 <25"
   },
   "scripts": {
     "start": "node server/index.js",

@@ -146,6 +146,12 @@ disque persistant). Sinon, manuellement :
 | Environment | Node |
 | Build command | `npm ci --omit=dev` |
 | Start command | `npm start` |
+
+`npm start` lance `server/index.js`. Un `server.js` à la racine existe
+uniquement pour que `node server.js` fonctionne aussi : c'est la commande de
+démarrage par défaut de beaucoup d'hébergeurs. La version de Node est fixée par
+`.nvmrc` et bornée dans `engines` — sans borne haute, Render installe la
+dernière version publiée, y compris une que personne n'a testée.
 | Health check path | `/api/health` |
 
 **Persistance** — Render ne propose de disque persistant qu'à partir des plans
@@ -198,6 +204,7 @@ vraies données de marché sans aucune configuration.
 ## Architecture
 
 ```
+server.js               alias de compatibilité vers server/index.js
 server/
   index.js              serveur HTTP + WebSocket + arrêt propre
   config.js             variables d'environnement, verrou LIVE
