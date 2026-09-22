@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="Nexus Trade — hub de trading crypto : bot Kraken multi-paires, sniper Solana, risk manager et backtests.">
+  <title>Nexus Trade</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23101010'/><path d='M7 23V9l9 9V9m4 14V9' stroke='%233987e5' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<!-- Écran de connexion, affiché uniquement si DASHBOARD_PASSWORD est défini. -->
+<div class="modal" id="loginModal" hidden>
+  <form class="modal__box" id="loginForm">
+    <h2 class="modal__title">Nexus Trade</h2>
+    <p class="modal__text">Ce tableau de bord est protégé. Entre le mot de passe pour continuer.</p>
+    <div class="field">
+      <label class="field__label" for="loginPassword">Mot de passe</label>
+      <input type="password" id="loginPassword" autocomplete="current-password" required>
+    </div>
+    <p class="modal__text neg" id="loginError" hidden></p>
+    <div class="modal__actions">
+      <button type="submit" class="btn btn--primary">Se connecter</button>
+    </div>
+  </form>
+</div>
+
+<!-- Confirmation générique (passage en LIVE, arrêt d'urgence…). -->
+<div class="modal" id="confirmModal" hidden>
+  <div class="modal__box">
+    <h2 class="modal__title" id="confirmTitle">Confirmer</h2>
+    <p class="modal__text" id="confirmText"></p>
+    <div class="modal__actions">
+      <button class="btn" id="confirmCancel">Annuler</button>
+      <button class="btn btn--danger" id="confirmOk">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<div class="app">
+  <header class="topbar">
+    <div class="topbar__row">
+      <div class="brand">
+        <span class="brand__dot" id="connDot" data-status="off" title="État de la connexion"></span>
+        NEXUS TRADE
+        <span class="brand__version">v5</span>
+      </div>
+      <div class="topbar__stats">
+        <div class="ministat">
+          <span class="ministat__label">Portefeuille</span>
+          <span class="ministat__value" id="topEquity">—</span>
+        </div>
+        <div class="ministat">
+          <span class="ministat__label">P&amp;L session</span>
+          <span class="ministat__value" id="topPnl">—</span>
+        </div>
+        <div class="ministat">
+          <span class="ministat__label">Positions</span>
+          <span class="ministat__value" id="topPositions">—</span>
+        </div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" data-view="kraken" aria-selected="true">Bot Kraken <span class="tab__badge" id="badgeKraken" hidden>0</span></button>
+      <button class="tab" role="tab" data-view="sniper" aria-selected="false">Sniper Solana <span class="tab__badge" id="badgeSniper" hidden>0</span></button>
+      <button class="tab" role="tab" data-view="risk" aria-selected="false">Risk &amp; apprentissage</button>
+      <button class="tab" role="tab" data-view="portfolio" aria-selected="false">Portefeuille</button>
+      <button class="tab" role="tab" data-view="backtest" aria-selected="false">Backtest</button>
+      <button class="tab" role="tab" data-view="logs" aria-selected="false">Journal</button>
+    </nav>
+  </header>
+
+  <main>
+    <div id="banners"></div>
+
+    <!-- ═══ BOT KRAKEN ═══════════════════════════════════════════════════ -->
+    <section class="view" id="view-kraken" role="tabpanel">
+      <div class="actionbar">
+        <button class="btn btn--primary" id="krakenToggle">Démarrer</button>
+        <button class="btn" id="krakenScan">Scanner</button>
+        <button class="btn btn--danger" id="panicButton" title="Coupe tout et ferme toutes les positions">Arrêt d'urgence</button>
+      </div>
+
+      <div class="grid grid--stats" style="margin-bottom:16px">
+        <div class="stat"><div class="stat__label">Solde</div><div class="stat__value" id="krSolde">—</div><div class="stat__hint" id="krSoldeHint">—</div></div>
+        <div class="stat"><div class="stat__label">P&amp;L ouvert</div><div class="stat__value" id="krOpenPnl">—</div><div class="stat__hint" id="krPositionsCount">—</div></div>
+        <div class="stat"><div class="stat__label">Seuil d'entrée</div><div class="stat__value" id="krThreshold">—</div><div class="stat__hint" id="krThresholdHint">—</div></div>
+        <div class="stat"><div class="stat__label">Dernier scan</div><div class="stat__value" id="krLastScan">—</div><div class="stat__hint" id="krConn">—</div></div>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Positions ouvertes</h2>
+            <div class="card__actions">
+              <button class="btn btn--sm" id="krakenCloseAll">Tout fermer</button>
+            </div>
+          </div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive">
+              <thead><tr>
+                <th>Paire</th><th class="num">Entrée</th><th class="num">Actuel</th>
+                <th class="num">P&amp;L</th><th class="num">TP / SL</th><th class="num">Trailing</th>
+                <th class="num">Score</th><th></th>
+              </tr></thead>
+              <tbody id="krPositions"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Scanner — 16 paires</h2>
+            <span class="card__sub" id="krScanSub"></span>
+          </div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive">
+              <thead><tr>
+                <th>Paire</th><th class="num">Prix</th><th class="num">24 h</th>
+                <th class="num">RSI</th><th class="num">MACD</th><th>Tendance</th>
+                <th class="num">Vol.</th><th class="num">BB</th><th class="num">ATR</th>
+                <th class="num">Confiance</th><th></th>
+              </tr></thead>
+              <tbody id="krMarket"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Réglages du bot</h2></div>
+          <div class="card__body" id="krSettings"></div>
+        </div>
+
+        <div class="card">
+          <div class="card__head">
+            <h2 class="card__title">Mode d'exécution</h2>
+            <div class="card__actions">
+              <div class="segmented" id="krModeSwitch">
+                <button data-mode="demo" aria-pressed="true">DÉMO</button>
+                <button data-mode="live" aria-pressed="false">LIVE</button>
+              </div>
+            </div>
+          </div>
+          <div class="card__body" id="krModeInfo"></div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head"><h2 class="card__title">Trades clôturés</h2></div>
+          <div class="card__body card__body--flush table-wrap table-wrap--scroll">
+            <table class="responsive">
+              <thead><tr>
+                <th>Paire</th><th class="num">Entrée</th><th class="num">Sortie</th>
+                <th class="num">P&amp;L</th><th class="num">Durée</th><th>Motif</th><th class="num">Score</th>
+              </tr></thead>
+              <tbody id="krClosed"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SNIPER SOLANA ════════════════════════════════════════════════ -->
+    <section class="view" id="view-sniper" role="tabpanel" hidden>
+      <div class="actionbar">
+        <button class="btn btn--primary" id="sniperToggle">Démarrer</button>
+        <button class="btn" id="sniperScan">Scanner</button>
+        <button class="btn" id="smartScan">Scan smart money</button>
+      </div>
+
+      <div class="grid grid--stats" style="margin-bottom:16px">
+        <div class="stat"><div class="stat__label">Solde</div><div class="stat__value" id="snSolde">—</div><div class="stat__hint" id="snSoldeHint">—</div></div>
+        <div class="stat"><div class="stat__label">P&amp;L ouvert</div><div class="stat__value" id="snOpenPnl">—</div><div class="stat__hint" id="snPositionsCount">—</div></div>
+        <div class="stat"><div class="stat__label">Candidats</div><div class="stat__value" id="snCandidates">—</div><div class="stat__hint" id="snEligible">—</div></div>
+        <div class="stat"><div class="stat__label">Dernier poll</div><div class="stat__value" id="snLastPoll">—</div><div class="stat__hint" id="snWallet">—</div></div>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Positions Solana</h2>
+            <div class="card__actions"><button class="btn btn--sm" id="sniperSellAll">Tout vendre</button></div>
+          </div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive">
+              <thead><tr>
+                <th>Token</th><th class="num">Entrée</th><th class="num">Actuel</th>
+                <th class="num">P&amp;L</th><th class="num">Score</th><th class="num">Âge</th><th></th>
+              </tr></thead>
+              <tbody id="snPositions"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Nouveaux tokens détectés</h2>
+            <span class="card__sub" id="snScanSub"></span>
+          </div>
+          <div class="card__body card__body--flush" id="snCandidateList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Réglages du sniper</h2></div>
+          <div class="card__body" id="snSettings"></div>
+        </div>
+
+        <div class="card">
+          <div class="card__head">
+            <h2 class="card__title">Wallet &amp; smart money</h2>
+            <div class="card__actions">
+              <div class="segmented" id="snModeSwitch">
+                <button data-mode="demo" aria-pressed="true">DÉMO</button>
+                <button data-mode="live" aria-pressed="false">LIVE</button>
+              </div>
+            </div>
+          </div>
+          <div class="card__body" id="snWalletInfo"></div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head"><h2 class="card__title">Snipes clôturés</h2></div>
+          <div class="card__body card__body--flush table-wrap table-wrap--scroll">
+            <table class="responsive">
+              <thead><tr>
+                <th>Token</th><th class="num">Entrée</th><th class="num">Sortie</th>
+                <th class="num">P&amp;L</th><th class="num">Durée</th><th>Motif</th><th class="num">Score</th>
+              </tr></thead>
+              <tbody id="snClosed"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ RISK & APPRENTISSAGE ═════════════════════════════════════════ -->
+    <section class="view" id="view-risk" role="tabpanel" hidden>
+      <div class="grid grid--stats" style="margin-bottom:16px">
+        <div class="stat"><div class="stat__label">P&amp;L du jour</div><div class="stat__value" id="rkPnl">—</div><div class="stat__hint" id="rkDay">—</div></div>
+        <div class="stat"><div class="stat__label">Marge de perte</div><div class="stat__value" id="rkRemaining">—</div><div class="stat__hint">avant coupure</div></div>
+        <div class="stat"><div class="stat__label">Trades Kraken</div><div class="stat__value" id="rkTrades">—</div><div class="stat__hint">aujourd'hui</div></div>
+        <div class="stat"><div class="stat__label">État</div><div class="stat__value" id="rkStatus">—</div><div class="stat__hint" id="rkStatusHint">—</div></div>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="card">
+          <div class="card__head">
+            <h2 class="card__title">Limites</h2>
+            <div class="card__actions"><button class="btn btn--sm" id="rkResume" hidden>Réautoriser</button></div>
+          </div>
+          <div class="card__body" id="rkLimits"></div>
+        </div>
+
+        <div class="card">
+          <div class="card__head">
+            <h2 class="card__title">Mode apprentissage</h2>
+            <span class="card__sub" id="rkSamples"></span>
+          </div>
+          <div class="card__body" id="rkRecommendation"></div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Performance par tranche de score</h2>
+            <span class="card__sub">P&amp;L moyen par tranche — bleu = gain, rouge = perte, valeur signée sur chaque barre</span>
+          </div>
+          <div class="card__body"><div class="chart" id="rkBracketChart"></div></div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive">
+              <thead><tr>
+                <th>Tranche</th><th class="num">Trades</th><th class="num">Gagnants</th>
+                <th class="num">Win rate</th><th class="num">P&amp;L moyen</th><th class="num">P&amp;L total</th><th>Fiabilité</th>
+              </tr></thead>
+              <tbody id="rkBrackets"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head">
+            <h2 class="card__title">Historique complet</h2>
+            <span class="card__sub" id="rkHistorySub"></span>
+          </div>
+          <div class="card__body card__body--flush table-wrap table-wrap--scroll">
+            <table class="responsive">
+              <thead><tr>
+                <th>Date</th><th>Plateforme</th><th>Actif</th>
+                <th class="num">Score</th><th class="num">P&amp;L</th><th class="num">%</th><th>Motif</th>
+              </tr></thead>
+              <tbody id="rkHistory"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PORTEFEUILLE ═════════════════════════════════════════════════ -->
+    <section class="view" id="view-portfolio" role="tabpanel" hidden>
+      <div class="actionbar">
+        <button class="btn" id="pfRefresh">Actualiser</button>
+      </div>
+      <div class="grid grid--stats" style="margin-bottom:16px">
+        <div class="stat"><div class="stat__label">Valeur totale</div><div class="stat__value" id="pfTotal">—</div><div class="stat__hint" id="pfUpdated">—</div></div>
+        <div class="stat"><div class="stat__label">P&amp;L ouvert</div><div class="stat__value" id="pfOpen">—</div><div class="stat__hint">positions en cours</div></div>
+        <div class="stat"><div class="stat__label">Réalisé aujourd'hui</div><div class="stat__value" id="pfRealised">—</div><div class="stat__hint">trades clôturés</div></div>
+        <div class="stat"><div class="stat__label">P&amp;L session</div><div class="stat__value" id="pfSession">—</div><div class="stat__hint">ouvert + réalisé</div></div>
+      </div>
+      <div class="grid grid--2">
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Kraken</h2><span class="card__sub" id="pfKrakenSub"></span></div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive"><thead><tr><th>Actif</th><th class="num">Quantité</th><th class="num">Prix</th><th class="num">Valeur</th></tr></thead>
+            <tbody id="pfKraken"></tbody></table>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Solana</h2><span class="card__sub" id="pfSolanaSub"></span></div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive"><thead><tr><th>Actif</th><th class="num">Quantité</th><th class="num">Prix</th><th class="num">Valeur</th></tr></thead>
+            <tbody id="pfSolana"></tbody></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BACKTEST ═════════════════════════════════════════════════════ -->
+    <section class="view" id="view-backtest" role="tabpanel" hidden>
+      <div class="grid grid--2">
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Paramètres du backtest</h2></div>
+          <div class="card__body" id="btForm"></div>
+        </div>
+        <div class="card">
+          <div class="card__head"><h2 class="card__title">Résultat global</h2><span class="card__sub" id="btMeta"></span></div>
+          <div class="card__body" id="btGlobal"><p class="empty">Lance un backtest pour voir les résultats.</p></div>
+        </div>
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head"><h2 class="card__title">Courbe d'équité</h2><span class="card__sub" id="btCurveSub"></span></div>
+          <div class="card__body"><div class="chart" id="btChart"></div></div>
+        </div>
+        <div class="card" style="grid-column: 1 / -1">
+          <div class="card__head"><h2 class="card__title">Détail par paire</h2></div>
+          <div class="card__body card__body--flush table-wrap">
+            <table class="responsive">
+              <thead><tr>
+                <th>Paire</th><th class="num">Trades</th><th class="num">Win rate</th>
+                <th class="num">P&amp;L</th><th class="num">Profit factor</th><th class="num">Drawdown max</th><th></th>
+              </tr></thead>
+              <tbody id="btPairs"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ JOURNAL ══════════════════════════════════════════════════════ -->
+    <section class="view" id="view-logs" role="tabpanel" hidden>
+      <div class="card">
+        <div class="card__head">
+          <h2 class="card__title">Journal serveur</h2>
+          <span class="card__sub">flux temps réel, secrets masqués</span>
+          <div class="card__actions">
+            <label class="switch" style="padding:0">
+              <input type="checkbox" id="logAutoscroll" checked>
+              <span class="switch__track"></span>
+              <span>Suivre</span>
+            </label>
+            <button class="btn btn--sm" id="logClear">Vider</button>
+          </div>
+        </div>
+        <div class="logs" id="logOutput"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script type="module" src="/js/app.js"></script>
+</body>
+</html>
