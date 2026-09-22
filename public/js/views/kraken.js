@@ -87,7 +87,9 @@ export function createKrakenView(ctx) {
 
     $('#krScanSub').textContent = snapshot.market.length
       ? `${snapshot.market.length} paires analysées · seuil ${snapshot.confirmation.threshold}`
-      : 'en attente du premier scan';
+      : snapshot.running
+        ? 'premier scan en cours…'
+        : 'bot à l\'arrêt — aucun scan effectué';
 
     ctx.setBadge('kraken', snapshot.positions.length);
   }
@@ -156,7 +158,14 @@ export function createKrakenView(ctx) {
         ),
       ]);
     });
-    fillTable($('#krMarket'), rows, { colspan: 11, empty: 'Aucune donnée de marché — vérifie la connexion Kraken.' });
+    // Trois raisons possibles à un tableau vide, et elles appellent trois
+    // actions différentes : ne pas envoyer l'utilisateur vérifier sa connexion
+    // alors qu'il lui suffit de lancer un scan.
+    let empty;
+    if (!snapshot.connection.ok) empty = `Kraken injoignable : ${snapshot.connection.message}`;
+    else if (!snapshot.lastScan) empty = 'Clique sur « Scanner » pour lancer la première analyse des 16 paires, ou sur « Démarrer » pour que le bot le fasse en continu.';
+    else empty = 'Le dernier scan n\'a renvoyé aucune paire exploitable.';
+    fillTable($('#krMarket'), rows, { colspan: 11, empty });
   }
 
   function renderClosed() {
