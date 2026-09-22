@@ -9,10 +9,12 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
-      - key: DATA_DIR
-        value: /var/data/nexus
+      # Garde-fou : aucun ordre réel ne part tant que ce n'est pas "true",
+      # quoi que demande l'interface.
       - key: ALLOW_LIVE_TRADING
         value: "false"
+      - key: DASHBOARD_PASSWORD
+        sync: false
       - key: KRAKEN_KEY
         sync: false
       - key: KRAKEN_SECRET
@@ -21,7 +23,9 @@ services:
         sync: false
       - key: SOLANA_RPC
         sync: false
-      - key: DASHBOARD_PASSWORD
+      - key: SMART_WALLETS
+        sync: false
+      - key: DEV_BLACKLIST
         sync: false
       - key: TELEGRAM_BOT_TOKEN
         sync: false
@@ -29,7 +33,23 @@ services:
         sync: false
       - key: DISCORD_WEBHOOK_URL
         sync: false
-    disk:
-      name: nexus-data
-      mountPath: /var/data
-      sizeGB: 1
+
+# ─────────────────────────────────────────────────────────────────────────────
+# PERSISTANCE
+#
+# Render ne propose de disque persistant qu'à partir des plans payants. En free
+# tier, le système de fichiers est éphémère : les positions, l'historique et les
+# réglages repartent à zéro à chaque redéploiement et à chaque réveil après
+# mise en veille.
+#
+# Dès que tu passes sur un plan payant, remplace `plan: free` par `plan: starter`
+# et décommente ce bloc + la variable DATA_DIR :
+#
+#     - key: DATA_DIR
+#       value: /var/data/nexus
+#
+#   disk:
+#     name: nexus-data
+#     mountPath: /var/data
+#     sizeGB: 1
+# ─────────────────────────────────────────────────────────────────────────────

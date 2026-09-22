@@ -148,10 +148,16 @@ disque persistant). Sinon, manuellement :
 | Start command | `npm start` |
 | Health check path | `/api/health` |
 
-Ajoute un **disque persistant** monté sur `/var/data` et `DATA_DIR=/var/data/nexus`
-pour que les positions et l'historique survivent aux redéploiements. Sans
-disque, le système de fichiers de Render est éphémère et l'état repart à zéro
-à chaque déploiement.
+**Persistance** — Render ne propose de disque persistant qu'à partir des plans
+payants. En free tier, le système de fichiers est éphémère : les positions,
+l'historique et les réglages repartent à zéro à chaque redéploiement et à
+chaque réveil après mise en veille. Sur un plan payant, ajoute un disque monté
+sur `/var/data` et `DATA_DIR=/var/data/nexus` (le bloc est prêt, commenté, dans
+`render.yaml`).
+
+Sans clés API, l'application fonctionne immédiatement : les endpoints publics
+Kraken (prix, bougies) n'en demandent pas, donc le mode démo tourne sur de
+vraies données de marché sans aucune configuration.
 
 ### Variables d'environnement
 
@@ -255,8 +261,9 @@ seule l'information.
   requêtes RPC : sur le RPC public ils tournent au ralenti. Un endpoint Helius
   ou QuickNode change tout.
 * Sur le free tier Render, l'instance s'endort après une période d'inactivité :
-  les bots ne tournent pas pendant ce temps. Un plan payant ou un ping externe
-  est nécessaire pour un fonctionnement 24/7.
+  les bots ne tournent pas pendant ce temps, et l'état non persisté est perdu au
+  réveil. Un plan payant (avec disque) est nécessaire pour un fonctionnement
+  24/7 fiable.
 * Le backtest ne modélise ni le slippage ni la profondeur du carnet : les
   résultats sont optimistes par rapport au réel.
 
