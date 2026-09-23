@@ -1,0 +1,14 @@
+:root{color-scheme:light;--bg:#F4F3F8;--surface:#fff;--ink:#1C1A2E;--muted:#67637E;--line:#DCD9E8;--accent:#5344F0;--mark:#FFE3E8}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#121120;--surface:#1C1B2E;--ink:#F1EFFA;--muted:#A5A0C2;--line:#34314F;--accent:#8E82FF;--mark:#5A2A3A}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Helvetica Neue",system-ui,sans-serif;padding-inline:16px}
+header,main,footer{max-width:760px;margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;padding-block:22px;border-bottom:1px solid var(--line)}
+.logo{font:800 22px/1 system-ui,sans-serif;letter-spacing:-.04em;color:var(--accent);text-decoration:none}
+a{color:var(--accent)}
+h1{font:800 clamp(32px,5vw,48px)/1.05 system-ui,sans-serif;letter-spacing:-.02em;margin:40px 0 20px}
+h2{font:700 20px/1.2 system-ui,sans-serif;margin:32px 0 8px}
+.muted{color:var(--muted)}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:15px}
+mark{background:var(--mark);color:inherit;padding:0 4px;border-radius:4px}
+footer{padding-block:40px;margin-top:40px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}

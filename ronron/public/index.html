@@ -136,8 +136,6 @@ section.block{padding-block:clamp(48px,7vw,88px)}
 .card .kind{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
 .card h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
 .card .spec{font:500 12px var(--mono);color:var(--muted)}
-.stars{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
-.stars i{font-style:normal;color:#F2A51A;letter-spacing:1px}
 .card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
 .price{font:700 22px/1 var(--display);font-variant-numeric:tabular-nums}
 .price s{font:500 13px var(--body);color:var(--muted);margin-left:6px}
@@ -167,26 +165,33 @@ section.block{padding-block:clamp(48px,7vw,88px)}
 @keyframes rip{0%,68%{transform:scale(.2);opacity:0}75%{opacity:.9}100%{transform:scale(1.4);opacity:0}}
 @media (max-width:860px){.feature{grid-template-columns:1fr}.specs{grid-template-columns:repeat(3,1fr)}}
 
-/* ── Engagements & avis ── */
+/* ── Engagements ── */
 .perks{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
 .perks div{border-top:2px solid var(--ink);padding-top:16px}
 .perks b{font:700 19px/1.2 var(--display);display:block;margin-bottom:6px}
 .perks p{margin:0;color:var(--muted);font-size:15px}
 @media (max-width:860px){.perks{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.perks{grid-template-columns:1fr}}
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.review{background:var(--surface);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:16px}
-.review blockquote{margin:0;font:500 19px/1.4 var(--display);letter-spacing:-.01em}
-.review footer{display:flex;align-items:center;gap:12px;margin-top:auto;font-size:14px;color:var(--muted)}
-.review .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--display);color:var(--ink)}
-@media (max-width:860px){.reviews{grid-template-columns:1fr}}
 
-/* ── Newsletter + footer ── */
-.news{background:var(--lilac);border-radius:32px;padding:clamp(28px,5vw,56px);display:flex;justify-content:space-between;gap:28px;align-items:center;flex-wrap:wrap}
-.news h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;max-width:18ch}
-.news form{display:flex;gap:10px;flex:1 1 340px;max-width:480px;flex-wrap:wrap}
-.news input{flex:1 1 200px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:14px 18px}
-.news .msg{flex-basis:100%;font-size:14px;color:var(--ok);margin:0}
+/* ── FAQ ── */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.faq details{background:var(--surface);border-radius:18px;padding:18px 22px}
+.faq summary{cursor:pointer;font:700 18px/1.3 var(--display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 22px/1 var(--mono);color:var(--accent);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--muted);margin:10px 0 0}
+@media (max-width:760px){.faq{grid-template-columns:1fr}}
+.modebar{background:var(--butter);color:var(--ink);text-align:center;font:500 12px/1.4 var(--mono);padding:6px 16px}
+.terms{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted)}
+.terms input{margin-top:3px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.terms a{color:var(--accent)}
+.err{color:#D6334F;font-size:14px;margin:0}
+.card .media img,.modal .pic img{width:100%;height:100%;object-fit:cover}
+.line .thumb img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.loading{grid-column:1/-1;color:var(--muted);padding:40px 0}
+
+/* ── Footer ── */
 footer.site{padding-block:56px 40px;color:var(--muted);font-size:14px}
 footer.site .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;padding-bottom:36px;border-bottom:1px solid var(--line)}
 footer.site h4{color:var(--ink);font:700 15px var(--display);margin:0 0 12px}
@@ -223,14 +228,6 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
 .row{display:flex;justify-content:space-between;font-size:15px}
 .row.total{font:700 22px var(--display);padding-top:6px}
 .drawer-foot .btn{justify-content:center;width:100%}
-.checkout{display:grid;gap:10px}
-.checkout label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
-.checkout input{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px}
-.checkout .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ok-box{text-align:center;padding:40px 10px}
-.ok-box h4{font:800 30px/1.1 var(--display);margin:12px 0 8px}
-.ok-box p{color:var(--muted)}
-.ok-box code{font-family:var(--mono);background:var(--surface-2);padding:3px 8px;border-radius:6px}
 
 .modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;pointer-events:none;opacity:0;transition:opacity .25s}
 .modal.on{pointer-events:auto;opacity:1}
@@ -263,7 +260,8 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
 </head>
 <body>
 
-<div class="promo">Livraison offerte dès <b>49 €</b> · Retours gratuits 30 jours · Expédié en 24 h depuis Lyon</div>
+<div class="modebar" id="modebar" hidden></div>
+<div class="promo">Livraison offerte dès <b>49 €</b> · 14 jours pour changer d'avis · Paiement sécurisé</div>
 
 <header class="top">
   <div class="wrap">
@@ -275,7 +273,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
       <a href="#boutique">Boutique</a>
       <a href="#fontaines">Fontaines</a>
       <a href="#engagements">Nos engagements</a>
-      <a href="#avis">Avis</a>
+      <a href="#faq">Questions</a>
     </nav>
     <div class="spacer"></div>
     <button class="icon-btn" id="favBtn" aria-label="Voir mes favoris">
@@ -295,16 +293,16 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
       <div>
         <p class="eyebrow">Accessoires pour chats d'intérieur</p>
         <h1>Tout ce qui fait <em>ronronner</em> <svg class="paw" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16" rx="5.4" ry="4.6"/><ellipse cx="5.2" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.4" cy="6.2" rx="2.2" ry="2.9"/><ellipse cx="14.6" cy="6.2" rx="2.2" ry="2.9"/><ellipse cx="18.8" cy="10.4" rx="2.2" ry="2.8"/></g></svg> votre chat.</h1>
-        <p class="lead">Fontaines silencieuses, distributeurs connectés, paniers moelleux et jouets qui réveillent le chasseur. Testés par nos 14 chats-testeurs avant d'arriver chez vous.</p>
+        <p class="lead">Fontaines à eau, distributeurs programmables, paniers moelleux et jouets qui réveillent le chasseur. Une sélection courte, choisie pour les chats qui vivent en appartement.</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#boutique">Découvrir la boutique
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-ghost" href="#fontaines">Pourquoi une fontaine ?</a>
         </div>
         <div class="proof">
-          <div><strong>4,9/5</strong>2 318 avis vérifiés</div>
-          <div><strong>38 000</strong>chats équipés</div>
-          <div><strong>2 ans</strong>de garantie</div>
+          <div><strong>14 jours</strong>pour changer d'avis</div>
+          <div><strong>49 €</strong>livraison offerte dès</div>
+          <div><strong>2 ans</strong>garantie légale</div>
         </div>
       </div>
       <div class="cat-stage" aria-hidden="true">
@@ -342,7 +340,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
           <circle cx="232" cy="372" r="3.4"/><circle cx="240" cy="375" r="3.4"/><circle cx="248" cy="372" r="3.4"/></g>
         </svg>
         <div class="tag-float tf1"><span class="dot"></span><span>Eau filtrée <b>2,5 L</b></span></div>
-        <div class="tag-float tf2">Silencieuse · <b>&lt; 25 dB</b></div>
+        <div class="tag-float tf2">Filtration <b>3 couches</b></div>
       </div>
     </div>
     <div class="ticker"><div class="track" id="ticker"></div></div>
@@ -365,7 +363,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
           <input id="q" type="search" placeholder="Rechercher un produit" autocomplete="off">
         </label>
         <select class="select" id="sort" aria-label="Trier les produits">
-          <option value="pop">Les plus aimés</option>
+          <option value="pop">Notre sélection</option>
           <option value="asc">Prix croissant</option>
           <option value="desc">Prix décroissant</option>
           <option value="new">Nouveautés</option>
@@ -381,12 +379,12 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
       <div class="feature">
         <div>
           <p class="eyebrow">Focus · Hydratation</p>
-          <h2>Un chat boit <em>2× plus</em> quand l'eau bouge.</h2>
-          <p>Descendant d'animaux du désert, le chat boit peu et se méfie de l'eau stagnante. Une fontaine qui recircule et filtre l'eau l'incite à boire davantage — un vrai plus pour ses reins.</p>
+          <h2>Un chat boit <em>plus</em> quand l'eau bouge.</h2>
+          <p>Descendant d'animaux du désert, le chat boit peu et se méfie de l'eau stagnante. Une fontaine qui recircule et filtre l'eau l'incite à boire davantage — une bonne habitude pour sa santé.</p>
           <div class="specs">
-            <div><b>2,5 L</b><span>autonomie 7 jours</span></div>
-            <div><b>25 dB</b><span>plus bas qu'un chuchotement</span></div>
-            <div><b>30 j</b><span>entre deux filtres</span></div>
+            <div><b>2,5 L</b><span>de réserve d'eau</span></div>
+            <div><b>3</b><span>couches de filtration</span></div>
+            <div><b>2–4 sem.</b><span>entre deux filtres</span></div>
           </div>
           <button class="btn btn-primary" data-open="source">Voir la fontaine Source</button>
         </div>
@@ -409,36 +407,26 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
 
   <section class="block" id="engagements" style="padding-top:0">
     <div class="wrap">
-      <div class="block-head"><div><p class="eyebrow">Nos engagements</p><h2>Pensé pour les chats,<br>validé par eux.</h2></div></div>
+      <div class="block-head"><div><p class="eyebrow">Nos engagements</p><h2>Acheter sans<br>se faire de souci.</h2></div></div>
       <div class="perks">
-        <div><b>Testé par 14 chats</b><p>Chaque produit passe 3 semaines chez nos chats-testeurs. Refusé par Pistache ? Il ne rentre pas au catalogue.</p></div>
-        <div><b>Matériaux sûrs</b><p>Céramique émaillée, inox 304 et plastiques sans BPA. Rien qui ne s'écaille dans la gamelle.</p></div>
-        <div><b>Expédition en 24 h</b><p>Commandé avant 14 h, expédié le jour même depuis notre entrepôt lyonnais, en colis recyclé.</p></div>
-        <div><b>Garantie 2 ans</b><p>Une pompe qui fatigue ? On la remplace, sans formulaire à rallonge.</p></div>
+        <div><b>Paiement sécurisé</b><p>Carte bancaire, Apple Pay ou Google Pay via Stripe. Nous ne voyons jamais votre numéro de carte.</p></div>
+        <div><b>Livraison suivie</b><p>Expédié depuis les entrepôts de nos partenaires, avec numéro de suivi envoyé par e-mail. <span data-delay></span></p></div>
+        <div><b>14 jours pour changer d'avis</b><p>Écrivez-nous, renvoyez le produit, on vous rembourse sous 14 jours.</p></div>
+        <div><b>Garantie légale 2 ans</b><p>Un produit défectueux ? Remplacement ou remboursement à nos frais.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="block" id="avis" style="padding-top:0">
+  <section class="block" id="faq" style="padding-top:0">
     <div class="wrap">
-      <div class="block-head"><div><p class="eyebrow">Avis clients · 4,9/5</p><h2>Ce qu'en disent<br>les humains.</h2></div></div>
-      <div class="reviews">
-        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Mimi ne buvait que dans le robinet de la salle de bain. Depuis la fontaine Source, elle y passe dix fois par jour. »</blockquote><footer><span class="av" style="background:var(--mint)">C</span>Camille, Nantes · Fontaine Source</footer></article>
-        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Le distributeur m'a sauvé les réveils à 5 h du matin. Oscar attend maintenant 7 h pile devant la machine. »</blockquote><footer><span class="av" style="background:var(--butter)">T</span>Thomas, Lille · Distributeur Horizon</footer></article>
-        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Le panier Nuage est devenu le trône officiel. Le chien n'a plus le droit d'approcher. »</blockquote><footer><span class="av" style="background:var(--bean-soft)">I</span>Inès, Bordeaux · Panier Nuage</footer></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" style="padding-top:0">
-    <div class="wrap">
-      <div class="news">
-        <h2>–10 % sur votre première commande.</h2>
-        <form id="newsForm" novalidate>
-          <input id="newsEmail" type="email" placeholder="votre@email.fr" aria-label="Adresse e-mail" required>
-          <button class="btn btn-primary" type="submit">Je m'inscris</button>
-          <p class="msg" id="newsMsg" aria-live="polite"></p>
-        </form>
+      <div class="block-head"><div><p class="eyebrow">Questions fréquentes</p><h2>Avant de<br>commander.</h2></div></div>
+      <div class="faq">
+        <details><summary>Quand vais-je recevoir ma commande ?</summary><p>Comptez <span data-delay-short></span> après la commande. Vous recevez un e-mail avec le numéro de suivi dès l'expédition. Une commande de plusieurs articles peut arriver en plusieurs colis.</p></details>
+        <details><summary>Combien coûte la livraison ?</summary><p><span data-shipcost></span>, et elle est offerte dès <span data-freefrom></span> d'achat.</p></details>
+        <details><summary>Comment retourner un produit ?</summary><p>Vous avez 14 jours après réception. Écrivez-nous, nous vous donnons l'adresse de retour, puis nous vous remboursons sous 14 jours. Détails dans <a href="/legal/livraison-retours">Livraison et retours</a>.</p></details>
+        <details><summary>Comment entretenir une fontaine ?</summary><p>Rincez le bac chaque semaine, nettoyez la pompe une fois par mois et changez le filtre toutes les 2 à 4 semaines selon le nombre de chats.</p></details>
+        <details><summary>Quels moyens de paiement acceptez-vous ?</summary><p>Carte bancaire (CB, Visa, Mastercard), Apple Pay et Google Pay. Le paiement est traité par Stripe.</p></details>
+        <details><summary>Mon chat n'aime pas le produit…</summary><p>Ça arrive, les chats ont leurs idées. Tant que le produit est complet et en bon état, vous pouvez le retourner sous 14 jours.</p></details>
       </div>
     </div>
   </section>
@@ -447,12 +435,12 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
 <footer class="site">
   <div class="wrap">
     <div class="cols">
-      <div><a class="logo" href="#top">ronron</a><p style="max-width:32ch">Accessoires pour chats d'intérieur, sélectionnés et testés à Lyon depuis 2021.</p></div>
-      <div><h4>Boutique</h4><ul><li><a href="#boutique">Fontaines</a></li><li><a href="#boutique">Repas</a></li><li><a href="#boutique">Jeux</a></li><li><a href="#boutique">Couchage</a></li></ul></div>
-      <div><h4>Aide</h4><ul><li><a href="#top">Livraison &amp; retours</a></li><li><a href="#top">Entretien des fontaines</a></li><li><a href="#top">Garantie</a></li><li><a href="#top">Contact</a></li></ul></div>
-      <div><h4>Ronron</h4><ul><li><a href="#engagements">Nos engagements</a></li><li><a href="#avis">Avis clients</a></li><li><a href="#top">Chats-testeurs</a></li></ul></div>
+      <div><a class="logo" href="#top">ronron</a><p style="max-width:32ch">Accessoires pour chats d'intérieur : fontaines, repas, jeux et couchage.</p></div>
+      <div><h4>Boutique</h4><ul><li><a href="#boutique" data-go="eau">Fontaines</a></li><li><a href="#boutique" data-go="repas">Repas</a></li><li><a href="#boutique" data-go="jeux">Jeux</a></li><li><a href="#boutique" data-go="dodo">Couchage</a></li></ul></div>
+      <div><h4>Aide</h4><ul><li><a href="/legal/livraison-retours">Livraison et retours</a></li><li><a href="#faq">Questions fréquentes</a></li><li id="contact"></li></ul></div>
+      <div><h4>Informations</h4><ul><li><a href="/legal/cgv">CGV</a></li><li><a href="/legal/mentions-legales">Mentions légales</a></li><li><a href="/legal/confidentialite">Confidentialité</a></li></ul></div>
     </div>
-    <div class="legal"><span>© 2026 Ronron · Boutique de démonstration</span><span>Paiement sécurisé · CB · PayPal · Apple Pay</span></div>
+    <div class="legal"><span>© <span id="year"></span> Ronron · <span id="vat"></span></span><span>Paiement sécurisé par Stripe · CB · Apple Pay · Google Pay</span></div>
   </div>
 </footer>
 
@@ -476,7 +464,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
 
 <script>
 (() => {
-  /* ─── Illustrations produit (SVG inline, couleur principale paramétrable) ─── */
+  /* ─── Illustrations produit (SVG inline, affichées tant qu'il n'y a pas de photo) ─── */
   const ILL = {
     fountain: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="70" ry="9" fill="#000" opacity=".08"/><path d="M34 110h132l-12 52a10 10 0 0 1-10 8H56a10 10 0 0 1-10-8z" fill="${c}"/><ellipse cx="100" cy="110" rx="66" ry="15" fill="#BFE3FF"/><ellipse cx="100" cy="110" rx="30" ry="6" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="90" y="52" width="20" height="56" rx="7" fill="#fff" opacity=".9"/><rect x="83" y="46" width="34" height="12" rx="6" fill="#1C1A2E"/><path d="M100 64c-4 6-6 9-6 12a6 6 0 0 0 12 0c0-3-2-6-6-12z" fill="#8FD0FF"/><circle cx="100" cy="148" r="4" fill="#1E8C62"/></svg>`,
     fountainSteel: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="64" ry="9" fill="#000" opacity=".08"/><rect x="40" y="80" width="120" height="90" rx="26" fill="${c}"/><ellipse cx="100" cy="84" rx="56" ry="13" fill="#D9DDE6"/><ellipse cx="100" cy="84" rx="44" ry="9" fill="#BFE3FF"/><path d="M100 50c-8 12-10 18-10 22a10 10 0 0 0 20 0c0-4-2-10-10-22z" fill="#8FD0FF"/><rect x="72" y="128" width="56" height="10" rx="5" fill="#fff" opacity=".6"/><rect x="72" y="128" width="40" height="10" rx="5" fill="#1E8C62"/></svg>`,
@@ -495,149 +483,80 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
   };
 
   const CATS = [
-    {id:'all', name:'Tout voir', ill:'ball', bg:'--surface-2', color:'#5344F0'},
     {id:'eau', name:'Fontaines', ill:'fountain', bg:'--sky', color:'#F4F3F8'},
     {id:'repas', name:'Repas', ill:'bowl', bg:'--butter', color:'#F8F4EC'},
     {id:'jeux', name:'Jeux', ill:'wand', bg:'--bean-soft', color:'#5344F0'},
     {id:'dodo', name:'Couchage', ill:'donut', bg:'--lilac', color:'#B9AEFF'},
     {id:'griffe', name:'Griffoirs', ill:'scratcher', bg:'--mint', color:'#C9A77C'},
     {id:'hygiene', name:'Hygiène', ill:'litter', bg:'--surface-2', color:'#BFEBDD'},
-  ];
-
-  const P = [
-    {id:'source', cat:'eau', name:'Fontaine Source', kind:'Fontaine céramique', ill:'fountain', bg:'--sky',
-     colors:['#F4F3F8','#BFEBDD','#FFD6DE'], price:69.9, was:79.9, rating:4.9, reviews:1284, badge:'Best-seller', pop:100, isNew:false,
-     spec:'2,5 L · 25 dB · filtre 30 j',
-     desc:"Céramique émaillée qui garde l'eau fraîche, triple filtration (mousse, charbon actif, résine) et pompe immergée ultra silencieuse. Le petit jet en surface attire même les chats les plus méfiants.",
-     facts:[['Capacité','2,5 L (≈ 7 jours pour 1 chat)'],['Bruit','< 25 dB'],['Matière','Céramique émaillée, sans BPA'],['Entretien','Passe au lave-vaisselle']]},
-    {id:'cascade', cat:'eau', name:'Fontaine Cascade', kind:'Fontaine inox sans fil', ill:'fountainSteel', bg:'--mint',
-     colors:['#C7CCD8','#1C1A2E'], price:89, rating:4.8, reviews:412, badge:'Nouveau', pop:88, isNew:true,
-     spec:'3 L · batterie 4 000 mAh',
-     desc:"Pompe sans fil rechargeable par USB-C et capteur de présence : l'eau ne coule que lorsque votre chat s'approche. Jusqu'à 30 jours d'autonomie.",
-     facts:[['Capacité','3 L'],['Autonomie','30 jours en mode capteur'],['Matière','Inox 304 brossé'],['Charge','USB-C, 4 h']]},
-    {id:'filtres', cat:'eau', name:'Filtres charbon × 6', kind:'Consommable', ill:'filter', bg:'--surface-2',
-     colors:['#BFEBDD'], price:14.9, rating:4.9, reviews:936, pop:80, isNew:false,
-     spec:'6 mois de filtration',
-     desc:"Recharges compatibles Source et Cascade. Charbon de coco actif et résine échangeuse d'ions pour retenir poils, calcaire et goût de chlore.",
-     facts:[['Contenu','6 filtres'],['Durée','30 jours chacun'],['Compatibilité','Source, Cascade']]},
-    {id:'horizon', cat:'repas', name:'Distributeur Horizon', kind:'Distributeur connecté', ill:'feeder', bg:'--butter',
-     colors:['#F4F3F8','#1C1A2E'], price:119, rating:4.7, reviews:538, badge:'Connecté', pop:92, isNew:false,
-     spec:'4 L · 10 repas / jour',
-     desc:"Programmez jusqu'à 10 repas par jour depuis l'appli, à la croquette près. Enregistrez votre voix pour appeler votre chat à table, même quand vous n'êtes pas là.",
-     facts:[['Réservoir','4 L de croquettes'],['Précision','Portions de 5 g'],['Alimentation','Secteur + piles de secours'],['Appli','iOS et Android']]},
-    {id:'gamelle', cat:'repas', name:'Gamelle surélevée 15°', kind:'Gamelle céramique', ill:'bowl', bg:'--bean-soft',
-     colors:['#F8F4EC','#5344F0','#FF9EB0'], price:29.9, rating:4.8, reviews:677, pop:78, isNew:false,
-     spec:'Inclinaison 15° · Ø 15 cm',
-     desc:"Surélevée et inclinée pour une posture naturelle, large et peu profonde pour ne pas frotter les moustaches. Pied en hêtre massif.",
-     facts:[['Diamètre','15 cm'],['Hauteur','10 cm'],['Matière','Céramique + hêtre']]},
-    {id:'plume', cat:'jeux', name:'Canne à plumes Rhéa', kind:'Jouet interactif', ill:'wand', bg:'--lilac',
-     colors:['#5344F0','#FFB547'], price:12.5, rating:4.9, reviews:1102, pop:95, isNew:false,
-     spec:'Canne 90 cm · 3 recharges',
-     desc:"Le jouet que tous les chats-testeurs ont réclamé. Plumes naturelles, fil souple qui imite le vol d'un oiseau, trois recharges incluses.",
-     facts:[['Longueur','90 cm'],['Inclus','3 recharges plumes'],['Canne','Bambou']]},
-    {id:'orbite', cat:'jeux', name:'Laser Orbite', kind:'Jouet automatique', ill:'laser', bg:'--surface-2',
-     colors:['#FFE3E8','#BFEBDD'], price:34.9, rating:4.5, reviews:219, badge:'Nouveau', pop:70, isNew:true,
-     spec:'Sessions de 15 min · USB-C',
-     desc:"Trajectoires aléatoires et arrêt automatique après 15 minutes pour éviter la frustration. Laser classe 1, sans danger pour les yeux.",
-     facts:[['Modes','Lent, rapide, aléatoire'],['Sécurité','Laser classe 1'],['Charge','USB-C']]},
-    {id:'balles', cat:'jeux', name:'Balles herbe-à-chat × 3', kind:'Jouet', ill:'ball', bg:'--mint',
-     colors:['#5344F0'], price:9.9, rating:4.6, reviews:388, pop:66, isNew:false,
-     spec:'Laine feutrée · cataire bio',
-     desc:"Balles en laine feutrée garnies de cataire bio française. Légères, silencieuses sur le parquet, parfaites pour les parties de foot nocturnes.",
-     facts:[['Contenu','3 balles'],['Matière','Laine feutrée'],['Garniture','Cataire bio']]},
-    {id:'nuage', cat:'dodo', name:'Panier Nuage', kind:'Panier donut', ill:'donut', bg:'--lilac',
-     colors:['#B9AEFF','#FFD6DE','#E7E3D8'], price:49.9, was:59.9, rating:4.9, reviews:1540, badge:'Best-seller', pop:98, isNew:false,
-     spec:'Ø 60 cm · lavable 30 °C',
-     desc:"Bords rebondis qui soutiennent la tête et fausse fourrure ultra douce : le panier dans lequel on se roule en boule. Déhoussable, lavable en machine.",
-     facts:[['Diamètre','60 cm'],['Lavage','Machine 30 °C'],['Fond','Antidérapant']]},
-    {id:'hamac', cat:'dodo', name:'Hamac de fenêtre', kind:'Couchage', ill:'hammock', bg:'--sky',
-     colors:['#FFB547','#5344F0'], price:39, rating:4.7, reviews:463, pop:84, isNew:false,
-     spec:'Ventouses · supporte 18 kg',
-     desc:"Un poste d'observation avec vue sur les oiseaux. Quatre ventouses renforcées et câbles acier : il tient même un Maine coon.",
-     facts:[['Charge max','18 kg'],['Dimensions','55 × 35 cm'],['Fixation','4 ventouses Ø 8 cm']]},
-    {id:'canopee', cat:'griffe', name:'Arbre à chat Canopée', kind:'Arbre à chat', ill:'tree', bg:'--butter',
-     colors:['#E7E3D8','#5344F0'], price:159, rating:4.8, reviews:301, pop:86, isNew:false,
-     spec:'142 cm · sisal naturel',
-     desc:"Trois plateformes, des poteaux entièrement gainés de sisal naturel et une base lestée qui ne bouge pas, même lors des sprints de 3 h du matin.",
-     facts:[['Hauteur','142 cm'],['Base','60 × 45 cm, lestée'],['Poteaux','Sisal naturel Ø 9 cm']]},
-    {id:'vague', cat:'griffe', name:'Griffoir Vague', kind:'Griffoir carton', ill:'scratcher', bg:'--mint',
-     colors:['#C9A77C'], price:24.9, rating:4.7, reviews:590, pop:74, isNew:false,
-     spec:'Carton recyclé · réversible',
-     desc:"Griffoir en carton ondulé recyclé, courbé pour s'y allonger. Réversible : quand une face est usée, on le retourne.",
-     facts:[['Longueur','58 cm'],['Matière','Carton recyclé, colle d\'amidon'],['Bonus','Sachet de cataire offert']]},
-    {id:'nid', cat:'hygiene', name:'Maison de toilette Nid', kind:'Bac à litière', ill:'litter', bg:'--bean-soft',
-     colors:['#BFEBDD','#F4F3F8'], price:79, rating:4.6, reviews:244, badge:'Nouveau', pop:72, isNew:true,
-     spec:'Filtre anti-odeurs · 50 cm',
-     desc:"Forme arrondie qui se fond dans le salon, filtre charbon anti-odeurs et tiroir coulissant pour un nettoyage sans se baisser.",
-     facts:[['Dimensions','50 × 40 × 44 cm'],['Filtre','Charbon actif'],['Accès','Porte battante amovible']]},
-    {id:'brosse', cat:'hygiene', name:'Brosse autonettoyante', kind:'Toilettage', ill:'brush', bg:'--sky',
-     colors:['#5344F0','#FF9EB0'], price:19.9, rating:4.8, reviews:812, pop:82, isNew:false,
-     spec:'Picots arrondis · 1 clic',
-     desc:"Des picots arrondis qui massent sans griffer. Un clic et tous les poils se détachent d'un bloc — fini la brosse à nettoyer à la main.",
-     facts:[['Picots','Inox à bout arrondi'],['Pelage','Court et mi-long'],['Nettoyage','Bouton rétractable']]},
+    {id:'all', name:'Tout voir', ill:'ball', bg:'--surface-2', color:'#5344F0'},
   ];
 
   const $ = s => document.querySelector(s);
-  const euro = n => n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
-  const FREE_SHIP = 49, SHIP_COST = 4.9;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  const euro = cents => (cents/100).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
   const store = {
     get(k,d){ try{ const v = localStorage.getItem('ronron:'+k); return v ? JSON.parse(v) : d; }catch{ return d; } },
     set(k,v){ try{ localStorage.setItem('ronron:'+k, JSON.stringify(v)); }catch{} }
   };
-  const byId = id => P.find(p => p.id === id);
 
-  let state = {
-    cat: 'all', q: '', sort: 'pop',
-    cart: store.get('cart', [{id:'source',qty:1,color:0},{id:'plume',qty:2,color:0}]),
-    favs: new Set(store.get('favs', ['nuage'])),
-    favOnly: false,
+  let P = [], SHIP = {freeFrom:4900, cost:490, minDays:6, maxDays:12}, MODE = 'demo';
+  const byId = id => P.find(p => p.id === id);
+  const state = {
+    cat: 'all', q: '', sort: 'pop', favOnly: false,
+    cart: store.get('cart', []),
+    favs: new Set(store.get('favs', [])),
   };
-  state.cart = state.cart.filter(l => byId(l.id));
+
+  // Photo du produit si elle existe, sinon l'illustration.
+  const visual = (p, colorIdx=0) => p.image
+    ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">`
+    : ILL[p.ill]((p.colors[colorIdx] || p.colors[0]).hex);
 
   /* ─── Ticker ─── */
-  const tick = ['Eau filtrée en continu','Livraison offerte dès 49 €','Testé par 14 chats','Céramique sans BPA','Retours 30 jours','Garantie 2 ans'];
-  $('#ticker').innerHTML = [...tick,...tick].map(t=>`<span>${t}</span>`).join('');
+  function renderTicker(){
+    const tick = ['Eau filtrée en continu', `Livraison offerte dès ${euro(SHIP.freeFrom)}`, 'Paiement sécurisé', '14 jours pour changer d\'avis', 'Garantie légale 2 ans', 'Livraison suivie'];
+    $('#ticker').innerHTML = [...tick,...tick].map(t=>`<span>${esc(t)}</span>`).join('');
+  }
 
   /* ─── Catégories ─── */
   function renderCats(){
-    $('#cats').innerHTML = CATS.filter(c=>c.id!=='all').concat(CATS[0]).map(c => {
+    $('#cats').innerHTML = CATS.map(c => {
       const n = c.id==='all' ? P.length : P.filter(p=>p.cat===c.id).length;
+      if (!n && c.id!=='all') return '';
       return `<button class="cat-tile" data-cat="${c.id}" aria-pressed="${state.cat===c.id && !state.favOnly}">
         <span class="ill" style="background:var(${c.bg})">${ILL[c.ill](c.color)}</span>
         <b>${c.name}</b><small>${n} produit${n>1?'s':''}</small></button>`;
     }).join('');
   }
-  $('#cats').addEventListener('click', e => {
-    const b = e.target.closest('[data-cat]'); if(!b) return;
-    state.cat = b.dataset.cat; state.favOnly = false; renderCats(); renderGrid();
-  });
+  const pickCat = id => { state.cat = id; state.favOnly = false; renderCats(); renderGrid(); };
+  $('#cats').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) pickCat(b.dataset.cat); });
+  document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', () => pickCat(a.dataset.go)));
 
   /* ─── Grille ─── */
-  const stars = r => '★★★★★'.slice(0, Math.round(r));
   function renderGrid(){
     const q = state.q.trim().toLowerCase();
-    let list = P.filter(p => (state.favOnly ? state.favs.has(p.id) : (state.cat==='all' || p.cat===state.cat))
+    const list = P.filter(p => (state.favOnly ? state.favs.has(p.id) : (state.cat==='all' || p.cat===state.cat))
       && (!q || (p.name+' '+p.kind+' '+p.desc).toLowerCase().includes(q)));
-    const s = {pop:(a,b)=>b.pop-a.pop, asc:(a,b)=>a.price-b.price, desc:(a,b)=>b.price-a.price, new:(a,b)=>(b.isNew-a.isNew)||(b.pop-a.pop)}[state.sort];
-    list.sort(s);
-    $('#results').textContent = state.favOnly ? `${list.length} favori${list.length>1?'s':''}` : `${list.length} produit${list.length>1?'s':''}`;
+    const sorts = {pop:(a,b)=>b.pop-a.pop, asc:(a,b)=>a.price-b.price, desc:(a,b)=>b.price-a.price, new:(a,b)=>(b.isNew-a.isNew)||(b.pop-a.pop)};
+    list.sort(sorts[state.sort]);
+    $('#results').textContent = `${list.length} ${state.favOnly ? 'favori' : 'produit'}${list.length>1?'s':''}`;
     $('#grid').innerHTML = list.length ? list.map(p => `
       <article class="card">
-        <button class="media" style="background:var(${p.bg})" data-open="${p.id}" aria-label="Voir ${p.name}">${ILL[p.ill](p.colors[0])}</button>
-        ${p.badge ? `<span class="badge ${p.isNew?'new':''}">${p.badge}</span>` : ''}
-        <button class="fav" data-fav="${p.id}" aria-pressed="${state.favs.has(p.id)}" aria-label="Ajouter ${p.name} aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20z"/></svg></button>
+        <button class="media" style="background:var(${p.bg})" data-open="${p.id}" aria-label="Voir ${esc(p.name)}">${visual(p)}</button>
+        ${p.badge ? `<span class="badge ${p.isNew?'new':''}">${esc(p.badge)}</span>` : ''}
+        <button class="fav" data-fav="${p.id}" aria-pressed="${state.favs.has(p.id)}" aria-label="Ajouter ${esc(p.name)} aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20z"/></svg></button>
         <div class="body">
-          <span class="kind">${p.kind}</span>
-          <h3>${p.name}</h3>
-          <span class="spec">${p.spec}</span>
-          <span class="stars"><i>${stars(p.rating)}</i>${p.rating.toLocaleString('fr-FR')} · ${p.reviews.toLocaleString('fr-FR')} avis</span>
+          <span class="kind">${esc(p.kind)}</span>
+          <h3>${esc(p.name)}</h3>
+          <span class="spec">${esc(p.spec)}</span>
           <div class="foot">
-            <span class="price">${euro(p.price)}${p.was?`<s>${euro(p.was)}</s>`:''}</span>
-            <button class="add" data-add="${p.id}" aria-label="Ajouter ${p.name} au panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            <span class="price">${euro(p.price)}</span>
+            <button class="add" data-add="${p.id}" aria-label="Ajouter ${esc(p.name)} au panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
           </div>
         </div>
       </article>`).join('')
-      : `<p class="empty">${state.favOnly ? 'Aucun favori pour l\'instant — touchez le cœur d\'un produit pour le garder ici.' : `Aucun produit ne correspond à « ${state.q.replace(/</g,'&lt;')} ». Essayez « fontaine » ou « jouet ».`}</p>`;
+      : `<p class="empty">${state.favOnly ? 'Aucun favori pour l\'instant : touchez le cœur d\'un produit pour le garder ici.' : `Aucun produit ne correspond à « ${esc(state.q)} ». Essayez « fontaine » ou « jouet ».`}</p>`;
   }
   $('#q').addEventListener('input', e => { state.q = e.target.value; renderGrid(); });
   $('#sort').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
@@ -656,7 +575,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
   /* ─── Panier ─── */
   function addToCart(id, qty=1, color=0){
     const l = state.cart.find(x => x.id===id && x.color===color);
-    l ? l.qty += qty : state.cart.push({id,qty,color});
+    if (l) l.qty = Math.min(10, l.qty + qty); else state.cart.push({id, qty:Math.min(10,qty), color});
     saveCart(); toast(`${byId(id).name} ajouté au panier`); bump('#cartCount');
   }
   function saveCart(){ store.set('cart', state.cart); updateCounts(); renderCart(); }
@@ -667,52 +586,62 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
   }
   function bump(sel){ const el=$(sel); el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),250); }
 
-  let checkoutStep = 'cart';
+  let done = null; // récapitulatif affiché après une commande de démonstration
   function renderCart(){
-    const sub = subtotal(), left = Math.max(0, FREE_SHIP - sub);
-    const ship = sub===0 || left===0 ? 0 : SHIP_COST;
-    $('#ship').innerHTML = sub===0 ? 'Livraison offerte dès 49 € d\'achat.'
-      : left>0 ? `Plus que <b>${euro(left)}</b> pour la livraison offerte.<div class="bar"><i style="width:${Math.min(100,sub/FREE_SHIP*100)}%"></i></div>`
-      : `<b style="color:var(--ok)">Livraison offerte</b> — votre chat vous remercie.<div class="bar"><i style="width:100%"></i></div>`;
-    $('#ship').hidden = checkoutStep==='done';
+    const sub = subtotal(), left = Math.max(0, SHIP.freeFrom - sub);
+    const ship = sub===0 || left===0 ? 0 : SHIP.cost;
+    $('#ship').hidden = !!done;
+    $('#ship').innerHTML = sub===0 ? `Livraison offerte dès ${euro(SHIP.freeFrom)} d'achat.`
+      : left>0 ? `Plus que <b>${euro(left)}</b> pour la livraison offerte.<div class="bar"><i style="width:${Math.min(100,sub/SHIP.freeFrom*100)}%"></i></div>`
+      : `<b style="color:var(--ok)">Livraison offerte</b>, votre chat vous remercie.<div class="bar"><i style="width:100%"></i></div>`;
 
-    if (checkoutStep==='done'){ return; }
+    if (done) {
+      $('#lines').innerHTML = `<div class="cart-empty">${ILL.fountain('#F4F3F8')}<p><b>Commande de démonstration validée (${euro(done.total)}).</b><br>Aucun paiement n'a été demandé : ajoutez une clé Stripe au serveur pour encaisser de vraies commandes.</p></div>`;
+      $('#foot').innerHTML = `<button class="btn btn-primary" data-close>Retour à la boutique</button>`;
+      return;
+    }
     if (!state.cart.length){
-      $('#lines').innerHTML = `<div class="cart-empty">${ILL.donut('#B9AEFF')}<p>Votre panier est vide.<br>Le panier Nuage, lui, est plein de poils.</p></div>`;
+      $('#lines').innerHTML = `<div class="cart-empty">${ILL.donut('#B9AEFF')}<p>Votre panier est vide.</p></div>`;
       $('#foot').innerHTML = `<button class="btn btn-primary" data-close>Continuer mes achats</button>`;
       return;
     }
-    if (checkoutStep==='form'){
-      $('#lines').innerHTML = `<form class="checkout" id="coForm" novalidate>
-        <p class="eyebrow" style="margin:12px 0 4px">Livraison</p>
-        <label for="coName">Nom complet<input id="coName" autocomplete="name" required value="Camille Martin"></label>
-        <label for="coAddr">Adresse<input id="coAddr" autocomplete="street-address" required value="12 rue des Chartreux"></label>
-        <div class="two"><label for="coZip">Code postal<input id="coZip" inputmode="numeric" required value="69001"></label><label for="coCity">Ville<input id="coCity" required value="Lyon"></label></div>
-        <label for="coMail">E-mail<input id="coMail" type="email" autocomplete="email" required placeholder="vous@email.fr"></label>
-        <p class="eyebrow" style="margin:12px 0 4px">Paiement (démo)</p>
-        <label for="coCard">Numéro de carte<input id="coCard" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="off"></label>
-        <p id="coErr" style="color:#D6334F;font-size:14px;margin:0" aria-live="polite"></p>
-      </form>`;
-    } else {
-      $('#lines').innerHTML = state.cart.map((l,i) => { const p=byId(l.id); return `
-        <div class="line">
-          <span class="thumb" style="background:var(${p.bg})">${ILL[p.ill](p.colors[l.color]||p.colors[0])}</span>
-          <div><b>${p.name}</b><small>${p.spec}</small><br>
-            <span class="qty"><button data-dec="${i}" aria-label="Retirer un">−</button><span>${l.qty}</span><button data-inc="${i}" aria-label="Ajouter un">+</button></span></div>
-          <div class="lp">${euro(p.price*l.qty)}<button class="rm" data-rm="${i}">Retirer</button></div>
-        </div>`; }).join('');
-    }
+    $('#lines').innerHTML = state.cart.map((l,i) => { const p=byId(l.id); const c=p.colors[l.color]||p.colors[0]; return `
+      <div class="line">
+        <span class="thumb" style="background:var(${p.bg})">${visual(p, l.color)}</span>
+        <div><b>${esc(p.name)}</b><small>${p.colors.length>1 ? esc(c.label)+' · ' : ''}${euro(p.price)}</small><br>
+          <span class="qty"><button data-dec="${i}" aria-label="Retirer un ${esc(p.name)}">−</button><span>${l.qty}</span><button data-inc="${i}" aria-label="Ajouter un ${esc(p.name)}">+</button></span></div>
+        <div class="lp">${euro(p.price*l.qty)}<button class="rm" data-rm="${i}">Retirer</button></div>
+      </div>`; }).join('');
+    const terms = !!$('#terms')?.checked;
     $('#foot').innerHTML = `
       <div class="row"><span>Sous-total</span><span>${euro(sub)}</span></div>
       <div class="row"><span>Livraison</span><span>${ship ? euro(ship) : 'Offerte'}</span></div>
-      <div class="row total"><span>Total</span><span>${euro(sub+ship)}</span></div>
-      ${checkoutStep==='form'
-        ? `<button class="btn btn-primary" data-pay>Payer ${euro(sub+ship)}</button><button class="btn btn-ghost" data-back>Retour au panier</button>`
-        : `<button class="btn btn-primary" data-checkout>Commander</button>`}`;
+      <div class="row total"><span>Total TTC</span><span>${euro(sub+ship)}</span></div>
+      <label class="terms" for="terms"><input type="checkbox" id="terms" ${terms?'checked':''}> <span>J'ai lu et j'accepte les <a href="/legal/cgv" target="_blank">conditions générales de vente</a>.</span></label>
+      <p class="err" id="payErr" aria-live="polite"></p>
+      <button class="btn btn-primary" data-checkout>Payer ${euro(sub+ship)}</button>
+      <small style="text-align:center;color:var(--muted)">Adresse de livraison et paiement sur la page sécurisée Stripe.</small>`;
   }
+
+  async function checkout(btn){
+    const err = $('#payErr');
+    if (!$('#terms').checked) { err.textContent = 'Cochez la case pour accepter les conditions générales de vente.'; return; }
+    btn.disabled = true; btn.textContent = 'Redirection vers le paiement…'; err.textContent = '';
+    try {
+      const r = await fetch('/api/checkout', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({acceptTerms:true, items: state.cart.map(({id,qty,color}) => ({id,qty,color}))})});
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || 'Le paiement est momentanément indisponible.');
+      if (data.url) { location.href = data.url; return; }
+      if (data.demo) { done = data.order; state.cart = []; saveCart(); $('#drawerTitle').textContent = 'Merci !'; renderCart(); }
+    } catch (e) {
+      err.textContent = e.message; btn.disabled = false; btn.textContent = 'Réessayer le paiement';
+    }
+  }
+
   const drawer = $('#drawer'), scrim = $('#scrim'), modal = $('#modal');
-  function openCart(){ checkoutStep = checkoutStep==='done' ? 'cart' : checkoutStep; $('#drawerTitle').textContent='Votre panier'; renderCart(); drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden','false'); }
-  function closeAll(){ drawer.classList.remove('on'); modal.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); if(checkoutStep==='done') checkoutStep='cart'; }
+  function openCart(){ $('#drawerTitle').textContent='Votre panier'; renderCart(); drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden','false'); }
+  function closeAll(){ drawer.classList.remove('on'); modal.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); done = null; }
   $('#cartBtn').addEventListener('click', openCart);
   scrim.addEventListener('click', closeAll);
   modal.addEventListener('click', e => { if(e.target===modal) closeAll(); });
@@ -722,43 +651,32 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
     const t = e.target.closest('button'); if(!t) return;
     const d = t.dataset;
     if ('close' in d) return closeAll();
-    if (d.inc) { state.cart[+d.inc].qty++; saveCart(); }
+    if (d.inc) { const l = state.cart[+d.inc]; l.qty = Math.min(10, l.qty+1); saveCart(); }
     if (d.dec) { const l = state.cart[+d.dec]; l.qty--; if(!l.qty) state.cart.splice(+d.dec,1); saveCart(); }
     if (d.rm)  { state.cart.splice(+d.rm,1); saveCart(); }
-    if ('checkout' in d) { checkoutStep='form'; $('#drawerTitle').textContent='Livraison'; renderCart(); }
-    if ('back' in d) { checkoutStep='cart'; $('#drawerTitle').textContent='Votre panier'; renderCart(); }
-    if ('pay' in d) {
-      const req = ['coName','coAddr','coZip','coCity','coMail'].map(id=>$('#'+id));
-      const bad = req.find(i => !i.value.trim() || (i.type==='email' && !/^\S+@\S+\.\S+$/.test(i.value)));
-      if (bad){ $('#coErr').textContent = bad.id==='coMail' ? 'Indiquez une adresse e-mail valide pour recevoir le suivi.' : 'Complétez ce champ pour qu\'on sache où livrer.'; bad.focus(); return; }
-      const total = subtotal() + (subtotal()>=FREE_SHIP?0:SHIP_COST);
-      const num = 'RR-' + Math.floor(100000 + Math.random()*900000);
-      checkoutStep='done'; state.cart=[]; store.set('cart',[]); updateCounts();
-      $('#drawerTitle').textContent='Merci !'; $('#ship').hidden=true;
-      $('#lines').innerHTML = `<div class="ok-box">${ILL.fountain('#F4F3F8')}<h4>Commande confirmée</h4><p>Commande <code>${num}</code> de ${euro(total)}.<br>Expédition aujourd'hui depuis Lyon. (Boutique de démonstration : aucun paiement n'a été prélevé.)</p></div>`;
-      $('#foot').innerHTML = `<button class="btn btn-primary" data-close>Retour à la boutique</button>`;
-    }
+    if ('checkout' in d) checkout(t);
   });
 
   /* ─── Fiche produit ─── */
   function openProduct(id){
-    const p = byId(id); let qty = 1, color = 0;
+    const p = byId(id); if (!p) return;
+    let qty = 1, color = 0;
     const draw = () => {
       $('#panel').innerHTML = `
-        <div class="pic" style="background:var(${p.bg})">${ILL[p.ill](p.colors[color])}${p.badge?`<span class="badge ${p.isNew?'new':''}">${p.badge}</span>`:''}</div>
+        <div class="pic" style="background:var(${p.bg})">${visual(p, color)}${p.badge?`<span class="badge ${p.isNew?'new':''}">${esc(p.badge)}</span>`:''}</div>
         <div class="info">
           <button class="close" data-x aria-label="Fermer">×</button>
-          <span class="eyebrow">${p.kind}</span>
-          <h3 id="mTitle">${p.name}</h3>
-          <span class="stars"><i>${stars(p.rating)}</i>${p.rating.toLocaleString('fr-FR')} · ${p.reviews.toLocaleString('fr-FR')} avis vérifiés</span>
-          <span class="price">${euro(p.price)}${p.was?`<s>${euro(p.was)}</s>`:''}</span>
-          <p class="desc">${p.desc}</p>
-          <dl>${p.facts.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
-          ${p.colors.length>1?`<div><span class="eyebrow">Coloris</span><div class="swatches" style="margin-top:8px">${p.colors.map((c,i)=>`<button style="background:${c}" data-sw="${i}" aria-pressed="${i===color}" aria-label="Coloris ${i+1}"></button>`).join('')}</div></div>`:''}
+          <span class="eyebrow">${esc(p.kind)}</span>
+          <h3 id="mTitle">${esc(p.name)}</h3>
+          <span class="price">${euro(p.price)}</span>
+          <p class="desc">${esc(p.desc)}</p>
+          <dl>${p.facts.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+          ${p.colors.length>1?`<div><span class="eyebrow">Coloris : ${esc(p.colors[color].label)}</span><div class="swatches" style="margin-top:8px">${p.colors.map((c,i)=>`<button style="background:${esc(c.hex)}" data-sw="${i}" aria-pressed="${i===color}" aria-label="Coloris ${esc(c.label)}"></button>`).join('')}</div></div>`:''}
           <div class="buy">
             <span class="qty"><button data-q="-1" aria-label="Moins">−</button><span>${qty}</span><button data-q="1" aria-label="Plus">+</button></span>
             <button class="btn btn-primary" data-buy>Ajouter · ${euro(p.price*qty)}</button>
           </div>
+          <small style="color:var(--muted)">Livraison suivie en ${SHIP.minDays} à ${SHIP.maxDays} jours ouvrés · Retours 14 jours</small>
         </div>`;
     };
     draw();
@@ -766,7 +684,7 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
       const t = e.target.closest('button'); if(!t) return;
       if ('x' in t.dataset) return closeAll();
       if (t.dataset.sw) { color = +t.dataset.sw; draw(); }
-      if (t.dataset.q)  { qty = Math.max(1, qty + +t.dataset.q); draw(); }
+      if (t.dataset.q)  { qty = Math.min(10, Math.max(1, qty + +t.dataset.q)); draw(); }
       if ('buy' in t.dataset) { addToCart(p.id, qty, color); closeAll(); }
     };
     modal.classList.add('on'); scrim.classList.add('on'); modal.setAttribute('aria-hidden','false');
@@ -780,23 +698,13 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
     if (t.dataset.fav) toggleFav(t.dataset.fav);
   });
 
-  /* ─── Newsletter ─── */
-  $('#newsForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const v = $('#newsEmail').value.trim();
-    const m = $('#newsMsg');
-    if (!/^\S+@\S+\.\S+$/.test(v)){ m.style.color='#D6334F'; m.textContent='Cette adresse ne semble pas valide — vérifiez le @ et le domaine.'; return; }
-    m.style.color=''; m.textContent = `C'est noté ! Votre code BIENVENUE10 est prêt pour ${v}.`; $('#newsEmail').value='';
-  });
-
   /* ─── Toast ─── */
   let tt; function toast(msg){ $('#toastTxt').textContent = msg; $('#toast').classList.add('on'); clearTimeout(tt); tt = setTimeout(()=>$('#toast').classList.remove('on'), 2200); }
 
   /* ─── Le chat du hero suit le curseur des yeux ─── */
   const cat = $('#heroCat');
   const pupils = [...cat.querySelectorAll('.pupil')], glints = [...cat.querySelectorAll('.glint')];
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!reduce) {
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const base = pupils.map(p => [+p.getAttribute('cx'), +p.getAttribute('cy')]);
     addEventListener('pointermove', e => {
       const r = cat.getBoundingClientRect(); if (!r.width) return;
@@ -810,14 +718,36 @@ footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap
         glints[i].setAttribute('cx', cx+7+ox*.6); glints[i].setAttribute('cy', cy-10+oy*.6);
       });
     }, {passive:true});
-    // clignement d'yeux
-    setInterval(() => {
-      pupils.forEach(p => p.animate([{transform:'scaleY(1)'},{transform:'scaleY(.1)'},{transform:'scaleY(1)'}],{duration:220,transformOrigin:'center'}));
-    }, 4200);
     pupils.forEach(p => { p.style.transformBox='fill-box'; p.style.transformOrigin='center'; });
+    setInterval(() => pupils.forEach(p => p.animate([{transform:'scaleY(1)'},{transform:'scaleY(.1)'},{transform:'scaleY(1)'}],{duration:220})), 4200);
   }
 
-  renderCats(); renderGrid(); updateCounts(); renderCart();
+  /* ─── Démarrage : catalogue et réglages fournis par le serveur ─── */
+  $('#year').textContent = new Date().getFullYear();
+  $('#grid').innerHTML = '<p class="loading">Chargement du catalogue…</p>';
+  fetch('/api/store').then(r => { if (!r.ok) throw new Error(); return r.json(); }).then(data => {
+    P = data.products; SHIP = data.shipping; MODE = data.payments;
+    // Un produit retiré du catalogue ou un coloris disparu ne doit pas bloquer le panier.
+    state.cart = state.cart.filter(l => byId(l.id) && Number.isInteger(l.qty) && l.qty > 0 && byId(l.id).colors[l.color]);
+    store.set('cart', state.cart);
+    $('#vat').textContent = data.shop.vatNote;
+    if (data.shop.email) $('#contact').innerHTML = `Contact : <span style="user-select:all">${esc(data.shop.email)}</span>`;
+    document.querySelectorAll('[data-delay]').forEach(el => el.textContent = `Comptez ${SHIP.minDays} à ${SHIP.maxDays} jours ouvrés.`);
+    document.querySelectorAll('[data-delay-short]').forEach(el => el.textContent = `${SHIP.minDays} à ${SHIP.maxDays} jours ouvrés`);
+    document.querySelectorAll('[data-shipcost]').forEach(el => el.textContent = euro(SHIP.cost));
+    document.querySelectorAll('[data-freefrom]').forEach(el => el.textContent = euro(SHIP.freeFrom));
+    if (MODE !== 'live') {
+      $('#modebar').hidden = false;
+      $('#modebar').textContent = MODE === 'test'
+        ? 'Boutique en mode test Stripe : utilisez la carte 4242 4242 4242 4242, aucun débit réel.'
+        : 'Boutique en démonstration : les commandes ne sont pas encaissées.';
+    }
+    renderTicker(); renderCats(); renderGrid(); updateCounts(); renderCart();
+    if (new URLSearchParams(location.search).has('panier')) openCart();
+  }).catch(() => {
+    $('#grid').innerHTML = '<p class="empty">Le catalogue ne répond pas. Rechargez la page dans un instant.</p>';
+  });
+
 })();
 </script>
 </body>
