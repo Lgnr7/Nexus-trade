@@ -4,3 +4,5 @@ node_modules/
 data/
 *.log
 .DS_Store
+# Le catalogue de la boutique est du code source, pas des données d'exécution.
+!ronron/data/
