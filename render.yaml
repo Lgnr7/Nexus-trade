@@ -34,6 +34,35 @@ services:
       - key: DISCORD_WEBHOOK_URL
         sync: false
 
+  # Boutique Ronron : service séparé, dossier ronron/.
+  - type: web
+    name: ronron
+    runtime: node
+    plan: free
+    rootDir: ronron
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: PUBLIC_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: SHOP_OWNER
+        sync: false
+      - key: SHOP_ADDRESS
+        sync: false
+      - key: SHOP_SIRET
+        sync: false
+      - key: SHOP_EMAIL
+        sync: false
+      - key: SHOP_MEDIATOR
+        sync: false
+
 # ─────────────────────────────────────────────────────────────────────────────
 # PERSISTANCE
 #
