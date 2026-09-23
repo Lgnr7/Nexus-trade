@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Ronron — fontaines à eau, distributeurs, jouets, paniers et arbres à chat pensés pour les chats d'intérieur.">
+<title>Ronron Maison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F4F3F8; --surface:#FFFFFF; --surface-2:#ECEAF4; --line:#DCD9E8;
+  --ink:#1C1A2E; --muted:#67637E; --accent:#5344F0; --accent-ink:#FFFFFF;
+  --bean:#FF9EB0; --bean-soft:#FFE3E8; --mint:#BFEBDD; --sky:#CFE0FF; --butter:#FFEBB0; --lilac:#E1DBFF;
+  --ok:#1E8C62; --shadow:0 18px 50px -24px rgba(40,30,110,.35);
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Instrument Sans", "Helvetica Neue", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --r:18px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121120; --surface:#1C1B2E; --surface-2:#25233B; --line:#34314F;
+    --ink:#F1EFFA; --muted:#A5A0C2; --accent:#8E82FF; --accent-ink:#120F2E;
+    --bean:#FF9EB0; --bean-soft:#3A2432; --mint:#1F3D36; --sky:#1F2C4A; --butter:#3B3320; --lilac:#2B2650;
+    --ok:#5FD3A2; --shadow:0 18px 50px -24px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121120; --surface:#1C1B2E; --surface-2:#25233B; --line:#34314F;
+  --ink:#F1EFFA; --muted:#A5A0C2; --accent:#8E82FF; --accent-ink:#120F2E;
+  --bean:#FF9EB0; --bean-soft:#3A2432; --mint:#1F3D36; --sky:#1F2C4A; --butter:#3B3320; --lilac:#2B2650;
+  --ok:#5FD3A2; --shadow:0 18px 50px -24px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.02em}
+.eyebrow{font:500 12px/1 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
+/* ── Bandeau + header ── */
+.promo{background:var(--ink);color:var(--bg);font-size:13px;text-align:center;padding:8px 16px}
+.promo b{color:var(--bean)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font:800 24px/1 var(--display);letter-spacing:-.04em;text-decoration:none;color:var(--ink)}
+.logo svg{width:34px;height:34px}
+nav.main{display:flex;gap:4px;margin-left:12px}
+nav.main a{color:var(--muted);text-decoration:none;font-weight:500;padding:8px 12px;border-radius:999px}
+nav.main a:hover{color:var(--ink);background:var(--surface-2)}
+.top .spacer{flex:1}
+.icon-btn{position:relative;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface)}
+.icon-btn:hover{border-color:var(--accent)}
+.icon-btn svg{width:20px;height:20px}
+.count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--bean);color:#3A0F1B;font:600 11px/20px var(--mono);text-align:center;transform:scale(1);transition:transform .25s cubic-bezier(.3,1.8,.5,1)}
+.count.bump{transform:scale(1.35)}
+@media (max-width:760px){nav.main{display:none}}
+
+/* ── Hero ── */
+.hero{padding-block:clamp(36px,6vw,72px) 24px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(46px,7.4vw,96px);font-weight:800}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 .paw{display:inline-block;width:.72em;height:.72em;vertical-align:-.04em;color:var(--bean)}
+.hero p.lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:40ch;margin:22px 0 30px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:15px 24px;font-weight:600;text-decoration:none;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-primary{background:var(--accent);color:var(--accent-ink);box-shadow:0 10px 30px -12px var(--accent)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.proof{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap}
+.proof div{font-size:13px;color:var(--muted)}
+.proof strong{display:block;font:700 26px/1.1 var(--display);color:var(--ink)}
+.cat-stage{position:relative;aspect-ratio:1;max-width:460px;width:100%;justify-self:center}
+.cat-stage .disc{position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--lilac),var(--sky) 70%)}
+.cat-stage svg.cat{position:relative;width:100%;height:100%}
+.tag-float{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);font-size:13px;display:flex;gap:10px;align-items:center}
+.tag-float b{font-family:var(--mono);font-weight:500}
+.tag-float .dot{width:10px;height:10px;border-radius:50%;background:var(--ok)}
+.tf1{left:-4%;bottom:18%}.tf2{right:-2%;top:12%}
+@media (prefers-reduced-motion:no-preference){.tf1{animation:float 6s ease-in-out infinite}.tf2{animation:float 7s ease-in-out -2s infinite}}
+@keyframes float{50%{transform:translateY(-10px)}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.cat-stage{max-width:360px}.tf1{left:0}.tf2{right:0}}
+
+/* ── Marquee ── */
+.ticker{border-block:1px solid var(--line);overflow:hidden;margin-top:28px;background:var(--surface)}
+.ticker .track{display:flex;gap:48px;width:max-content;padding:14px 0;font:500 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.ticker span::before{content:"✦";margin-right:48px;color:var(--bean)}
+@media (prefers-reduced-motion:no-preference){.ticker .track{animation:marq 38s linear infinite}}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ── Catégories ── */
+section.block{padding-block:clamp(48px,7vw,88px)}
+.block-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.block-head h2{font-size:clamp(34px,4.6vw,56px);font-weight:800}
+.block-head p{color:var(--muted);max-width:44ch;margin:10px 0 0}
+.cats{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}
+.cat-tile{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:18px;border-radius:var(--r);border:1px solid transparent;background:var(--surface);text-align:left;transition:transform .25s,border-color .25s}
+.cat-tile:hover{transform:translateY(-4px);border-color:var(--line)}
+.cat-tile[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.cat-tile .ill{width:56px;height:56px;border-radius:14px;display:grid;place-items:center}
+.cat-tile .ill svg{width:40px;height:40px}
+.cat-tile b{font:700 17px/1.1 var(--display)}
+.cat-tile small{color:var(--muted);font-family:var(--mono);font-size:11px}
+@media (max-width:980px){.cats{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.cat-tile{flex:0 0 150px;scroll-snap-align:start}}
+
+/* ── Boutique ── */
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:0 16px}
+.search svg{width:18px;height:18px;color:var(--muted);flex:none}
+.search input{border:0;background:transparent;padding:13px 0;width:100%;outline:none}
+.select{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 16px}
+.results{font:500 12px var(--mono);color:var(--muted);margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{position:relative;display:flex;flex-direction:column;background:var(--surface);border-radius:22px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .media{position:relative;aspect-ratio:1/.9;display:grid;place-items:center;border:0;padding:0;width:100%}
+.card .media svg{width:66%;height:66%;transition:transform .5s cubic-bezier(.2,.9,.3,1.2)}
+.card:hover .media svg{transform:scale(1.07) rotate(-3deg)}
+.badge{position:absolute;top:14px;left:14px;background:var(--ink);color:var(--bg);font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:7px 10px;border-radius:999px}
+.badge.new{background:var(--bean);color:#3A0F1B}
+.fav{position:absolute;top:10px;right:10px;width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);display:grid;place-items:center;box-shadow:0 4px 14px -6px rgba(0,0,0,.25)}
+.fav svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:2}
+.fav[aria-pressed="true"] svg{fill:var(--bean);stroke:var(--bean)}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card .kind{font:500 11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.card h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.card .spec{font:500 12px var(--mono);color:var(--muted)}
+.stars{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}
+.stars i{font-style:normal;color:#F2A51A;letter-spacing:1px}
+.card .foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
+.price{font:700 22px/1 var(--display);font-variant-numeric:tabular-nums}
+.price s{font:500 13px var(--body);color:var(--muted);margin-left:6px}
+.add{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;border:0;background:var(--accent);color:var(--accent-ink);transition:transform .2s}
+.add:hover{transform:rotate(90deg)}
+.add svg{width:20px;height:20px}
+.empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted)}
+
+/* ── Focus fontaine (éditorial) ── */
+.feature{background:var(--ink);color:var(--bg);border-radius:32px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;overflow:hidden;position:relative}
+.feature h2{font-size:clamp(34px,4.6vw,60px);font-weight:800}
+.feature h2 em{font-style:normal;color:var(--bean)}
+.feature p{color:color-mix(in srgb,var(--bg) 72%,transparent);max-width:46ch}
+.feature .eyebrow{color:var(--bean)}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:color-mix(in srgb,var(--bg) 18%,transparent);border-radius:16px;overflow:hidden;margin:26px 0}
+.specs div{background:var(--ink);padding:16px}
+.specs b{display:block;font:500 24px/1 var(--mono);color:var(--bg)}
+.specs span{font-size:12px;color:color-mix(in srgb,var(--bg) 60%,transparent)}
+.feature .btn-primary{background:var(--bean);color:#3A0F1B;box-shadow:none}
+.water{position:relative;aspect-ratio:1;max-width:420px;width:100%;justify-self:center}
+.water svg{width:100%;height:100%}
+@media (prefers-reduced-motion:no-preference){
+  .drop{animation:drip 2.4s ease-in infinite}
+  .ripple{transform-origin:center;transform-box:fill-box;animation:rip 2.4s ease-out infinite}
+}
+@keyframes drip{0%{transform:translateY(0);opacity:0}15%{opacity:1}70%{transform:translateY(58px);opacity:1}75%,100%{transform:translateY(58px);opacity:0}}
+@keyframes rip{0%,68%{transform:scale(.2);opacity:0}75%{opacity:.9}100%{transform:scale(1.4);opacity:0}}
+@media (max-width:860px){.feature{grid-template-columns:1fr}.specs{grid-template-columns:repeat(3,1fr)}}
+
+/* ── Engagements & avis ── */
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.perks div{border-top:2px solid var(--ink);padding-top:16px}
+.perks b{font:700 19px/1.2 var(--display);display:block;margin-bottom:6px}
+.perks p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:860px){.perks{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.perks{grid-template-columns:1fr}}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:var(--surface);border-radius:22px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.review blockquote{margin:0;font:500 19px/1.4 var(--display);letter-spacing:-.01em}
+.review footer{display:flex;align-items:center;gap:12px;margin-top:auto;font-size:14px;color:var(--muted)}
+.review .av{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--display);color:var(--ink)}
+@media (max-width:860px){.reviews{grid-template-columns:1fr}}
+
+/* ── Newsletter + footer ── */
+.news{background:var(--lilac);border-radius:32px;padding:clamp(28px,5vw,56px);display:flex;justify-content:space-between;gap:28px;align-items:center;flex-wrap:wrap}
+.news h2{font-size:clamp(28px,3.6vw,44px);font-weight:800;max-width:18ch}
+.news form{display:flex;gap:10px;flex:1 1 340px;max-width:480px;flex-wrap:wrap}
+.news input{flex:1 1 200px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:14px 18px}
+.news .msg{flex-basis:100%;font-size:14px;color:var(--ok);margin:0}
+footer.site{padding-block:56px 40px;color:var(--muted);font-size:14px}
+footer.site .cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;padding-bottom:36px;border-bottom:1px solid var(--line)}
+footer.site h4{color:var(--ink);font:700 15px var(--display);margin:0 0 12px}
+footer.site ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+footer.site a{color:inherit;text-decoration:none}
+footer.site a:hover{color:var(--ink)}
+footer.site .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;font:500 12px var(--mono)}
+@media (max-width:760px){footer.site .cols{grid-template-columns:1fr 1fr}}
+
+/* ── Panneaux (panier, fiche produit) ── */
+.scrim{position:fixed;inset:0;background:rgba(15,12,35,.45);backdrop-filter:blur(3px);z-index:40;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.2,.9,.3,1);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.on{transform:none}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid var(--line)}
+.drawer-head h3{font-size:26px}
+.ship{padding:16px 22px;border-bottom:1px solid var(--line);font-size:14px}
+.bar{height:8px;border-radius:999px;background:var(--surface-2);margin-top:10px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--bean));border-radius:inherit;transition:width .5s}
+.lines{flex:1;overflow:auto;padding:8px 22px}
+.line{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.line .thumb{width:72px;height:72px;border-radius:14px;display:grid;place-items:center}
+.line .thumb svg{width:50px;height:50px}
+.line b{font:700 16px/1.2 var(--display);display:block}
+.line small{color:var(--muted);font-family:var(--mono);font-size:12px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;margin-top:8px}
+.qty button{width:30px;height:30px;border:0;background:none;font-size:16px}
+.qty span{min-width:22px;text-align:center;font:500 13px var(--mono)}
+.line .lp{text-align:right;font:700 16px var(--display);font-variant-numeric:tabular-nums}
+.line .rm{display:block;margin-top:8px;border:0;background:none;color:var(--muted);font-size:12px;text-decoration:underline;padding:0}
+.cart-empty{text-align:center;color:var(--muted);padding:60px 10px}
+.cart-empty svg{width:120px;height:120px;margin-bottom:12px}
+.drawer-foot{padding:18px 22px 22px;border-top:1px solid var(--line);display:grid;gap:10px}
+.row{display:flex;justify-content:space-between;font-size:15px}
+.row.total{font:700 22px var(--display);padding-top:6px}
+.drawer-foot .btn{justify-content:center;width:100%}
+.checkout{display:grid;gap:10px}
+.checkout label{display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.checkout input{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px}
+.checkout .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ok-box{text-align:center;padding:40px 10px}
+.ok-box h4{font:800 30px/1.1 var(--display);margin:12px 0 8px}
+.ok-box p{color:var(--muted)}
+.ok-box code{font-family:var(--mono);background:var(--surface-2);padding:3px 8px;border-radius:6px}
+
+.modal{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;pointer-events:none;opacity:0;transition:opacity .25s}
+.modal.on{pointer-events:auto;opacity:1}
+.modal .panel{width:min(900px,100%);max-height:calc(100% - 32px);overflow:auto;background:var(--bg);border-radius:28px;display:grid;grid-template-columns:1fr 1fr;transform:translateY(20px) scale(.98);transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+.modal.on .panel{transform:none}
+.modal .pic{display:grid;place-items:center;min-height:320px;position:relative}
+.modal .pic svg{width:70%;height:70%}
+.modal .info{padding:32px;display:flex;flex-direction:column;gap:14px;position:relative}
+.modal h3{font-size:clamp(28px,3.4vw,40px);font-weight:800;padding-right:40px}
+.modal .desc{color:var(--muted);margin:0}
+.modal dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:4px 0;font-size:14px}
+.modal dt{font:500 12px var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding-top:2px}
+.modal dd{margin:0}
+.swatches{display:flex;gap:10px}
+.swatches button{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 0 1px var(--line)}
+.swatches button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--accent)}
+.buy{display:flex;gap:10px;align-items:center;margin-top:auto;flex-wrap:wrap}
+.buy .qty{margin:0}
+.buy .qty button{width:42px;height:46px}
+.buy .btn{flex:1;justify-content:center}
+.close{position:absolute;top:18px;right:18px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:20px;line-height:1}
+@media (max-width:760px){.modal .panel{grid-template-columns:1fr}.modal .pic{min-height:220px}.modal .info{padding:22px}}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:999px;z-index:60;display:flex;gap:10px;align-items:center;font-size:14px;transition:transform .35s cubic-bezier(.2,.9,.3,1.3);max-width:calc(100% - 32px)}
+.toast.on{transform:translate(-50%,0)}
+.toast svg{width:18px;height:18px;color:var(--bean);flex:none}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="promo">Livraison offerte dès <b>49 €</b> · Retours gratuits 30 jours · Expédié en 24 h depuis Lyon</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Ronron, accueil">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 8l8 7h12l8-7v17a14 14 0 0 1-28 0z" fill="var(--accent)"/><circle cx="15" cy="23" r="2.2" fill="var(--accent-ink)"/><circle cx="25" cy="23" r="2.2" fill="var(--accent-ink)"/><path d="M18 28.5l2 1.6 2-1.6" stroke="var(--accent-ink)" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      ronron
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#boutique">Boutique</a>
+      <a href="#fontaines">Fontaines</a>
+      <a href="#engagements">Nos engagements</a>
+      <a href="#avis">Avis</a>
+    </nav>
+    <div class="spacer"></div>
+    <button class="icon-btn" id="favBtn" aria-label="Voir mes favoris">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20z"/></svg>
+      <span class="count" id="favCount">0</span>
+    </button>
+    <button class="icon-btn" id="cartBtn" aria-label="Ouvrir le panier">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 8h14l-1.3 10.2a2 2 0 0 1-2 1.8H8.3a2 2 0 0 1-2-1.8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Accessoires pour chats d'intérieur</p>
+        <h1>Tout ce qui fait <em>ronronner</em> <svg class="paw" viewBox="0 0 24 24" aria-hidden="true"><g fill="currentColor"><ellipse cx="12" cy="16" rx="5.4" ry="4.6"/><ellipse cx="5.2" cy="10.4" rx="2.2" ry="2.8"/><ellipse cx="9.4" cy="6.2" rx="2.2" ry="2.9"/><ellipse cx="14.6" cy="6.2" rx="2.2" ry="2.9"/><ellipse cx="18.8" cy="10.4" rx="2.2" ry="2.8"/></g></svg> votre chat.</h1>
+        <p class="lead">Fontaines silencieuses, distributeurs connectés, paniers moelleux et jouets qui réveillent le chasseur. Testés par nos 14 chats-testeurs avant d'arriver chez vous.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#boutique">Découvrir la boutique
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="#fontaines">Pourquoi une fontaine ?</a>
+        </div>
+        <div class="proof">
+          <div><strong>4,9/5</strong>2 318 avis vérifiés</div>
+          <div><strong>38 000</strong>chats équipés</div>
+          <div><strong>2 ans</strong>de garantie</div>
+        </div>
+      </div>
+      <div class="cat-stage" aria-hidden="true">
+        <div class="disc"></div>
+        <svg class="cat" viewBox="0 0 400 400" id="heroCat">
+          <!-- queue -->
+          <path d="M300 330c60-10 70-80 40-110" stroke="#2B2742" stroke-width="22" fill="none" stroke-linecap="round" id="tail"/>
+          <!-- corps -->
+          <ellipse cx="205" cy="310" rx="110" ry="72" fill="#2B2742"/>
+          <!-- tête -->
+          <path d="M110 110l28 58h124l28-58-14 118a88 70 0 0 1-152 0z" fill="#2B2742"/>
+          <ellipse cx="200" cy="205" rx="92" ry="76" fill="#2B2742"/>
+          <path d="M122 118l30 46-38 8z" fill="#FF9EB0" opacity=".85"/>
+          <path d="M278 118l-30 46 38 8z" fill="#FF9EB0" opacity=".85"/>
+          <!-- yeux -->
+          <g>
+            <ellipse cx="163" cy="200" rx="24" ry="26" fill="#E6F07A"/>
+            <ellipse cx="237" cy="200" rx="24" ry="26" fill="#E6F07A"/>
+            <ellipse class="pupil" cx="163" cy="200" rx="7" ry="19" fill="#141225"/>
+            <ellipse class="pupil" cx="237" cy="200" rx="7" ry="19" fill="#141225"/>
+            <circle class="glint" cx="170" cy="190" r="4" fill="#fff"/>
+            <circle class="glint" cx="244" cy="190" r="4" fill="#fff"/>
+          </g>
+          <!-- nez + bouche -->
+          <path d="M191 232h18l-9 10z" fill="#FF9EB0"/>
+          <path d="M200 242v8m0 0c-6 7-14 6-18 1m18-1c6 7 14 6 18 1" stroke="#FF9EB0" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- moustaches -->
+          <g stroke="#8A85A8" stroke-width="2.4" stroke-linecap="round">
+            <path d="M150 238l-62-8M150 246l-58 8"/><path d="M250 238l62-8M250 246l58 8"/>
+          </g>
+          <!-- pattes -->
+          <ellipse cx="160" cy="370" rx="26" ry="16" fill="#3A3558"/>
+          <ellipse cx="240" cy="370" rx="26" ry="16" fill="#3A3558"/>
+          <g fill="#FF9EB0"><circle cx="152" cy="372" r="3.4"/><circle cx="160" cy="375" r="3.4"/><circle cx="168" cy="372" r="3.4"/>
+          <circle cx="232" cy="372" r="3.4"/><circle cx="240" cy="375" r="3.4"/><circle cx="248" cy="372" r="3.4"/></g>
+        </svg>
+        <div class="tag-float tf1"><span class="dot"></span><span>Eau filtrée <b>2,5 L</b></span></div>
+        <div class="tag-float tf2">Silencieuse · <b>&lt; 25 dB</b></div>
+      </div>
+    </div>
+    <div class="ticker"><div class="track" id="ticker"></div></div>
+  </section>
+
+  <section class="block" id="boutique">
+    <div class="wrap">
+      <div class="block-head">
+        <div>
+          <p class="eyebrow">Rayons</p>
+          <h2>Faites vos courses<br>par envie de chat.</h2>
+        </div>
+        <p>Choisissez un rayon ou cherchez directement : « fontaine », « plume », « griffoir »…</p>
+      </div>
+      <div class="cats" id="cats"></div>
+
+      <div class="toolbar" style="margin-top:36px">
+        <label class="search" for="q">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Rechercher un produit" autocomplete="off">
+        </label>
+        <select class="select" id="sort" aria-label="Trier les produits">
+          <option value="pop">Les plus aimés</option>
+          <option value="asc">Prix croissant</option>
+          <option value="desc">Prix décroissant</option>
+          <option value="new">Nouveautés</option>
+        </select>
+        <span class="results" id="results"></span>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="fontaines" style="padding-top:0">
+    <div class="wrap">
+      <div class="feature">
+        <div>
+          <p class="eyebrow">Focus · Hydratation</p>
+          <h2>Un chat boit <em>2× plus</em> quand l'eau bouge.</h2>
+          <p>Descendant d'animaux du désert, le chat boit peu et se méfie de l'eau stagnante. Une fontaine qui recircule et filtre l'eau l'incite à boire davantage — un vrai plus pour ses reins.</p>
+          <div class="specs">
+            <div><b>2,5 L</b><span>autonomie 7 jours</span></div>
+            <div><b>25 dB</b><span>plus bas qu'un chuchotement</span></div>
+            <div><b>30 j</b><span>entre deux filtres</span></div>
+          </div>
+          <button class="btn btn-primary" data-open="source">Voir la fontaine Source</button>
+        </div>
+        <div class="water" aria-hidden="true">
+          <svg viewBox="0 0 300 300">
+            <ellipse cx="150" cy="250" rx="110" ry="16" fill="#000" opacity=".25"/>
+            <path d="M52 170h196l-18 72a14 14 0 0 1-14 10H84a14 14 0 0 1-14-10z" fill="#F4F3F8"/>
+            <ellipse cx="150" cy="170" rx="98" ry="22" fill="#BFE3FF"/>
+            <ellipse class="ripple" cx="150" cy="172" rx="40" ry="8" fill="none" stroke="#fff" stroke-width="3"/>
+            <rect x="136" y="84" width="28" height="80" rx="10" fill="#E1DBFF"/>
+            <rect x="126" y="76" width="48" height="16" rx="8" fill="#5344F0"/>
+            <path class="drop" d="M150 100c-6 9-9 14-9 18a9 9 0 0 0 18 0c0-4-3-9-9-18z" fill="#8FD0FF"/>
+            <path d="M84 206h132" stroke="#DCD9E8" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="150" cy="226" r="6" fill="#1E8C62"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="engagements" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head"><div><p class="eyebrow">Nos engagements</p><h2>Pensé pour les chats,<br>validé par eux.</h2></div></div>
+      <div class="perks">
+        <div><b>Testé par 14 chats</b><p>Chaque produit passe 3 semaines chez nos chats-testeurs. Refusé par Pistache ? Il ne rentre pas au catalogue.</p></div>
+        <div><b>Matériaux sûrs</b><p>Céramique émaillée, inox 304 et plastiques sans BPA. Rien qui ne s'écaille dans la gamelle.</p></div>
+        <div><b>Expédition en 24 h</b><p>Commandé avant 14 h, expédié le jour même depuis notre entrepôt lyonnais, en colis recyclé.</p></div>
+        <div><b>Garantie 2 ans</b><p>Une pompe qui fatigue ? On la remplace, sans formulaire à rallonge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="avis" style="padding-top:0">
+    <div class="wrap">
+      <div class="block-head"><div><p class="eyebrow">Avis clients · 4,9/5</p><h2>Ce qu'en disent<br>les humains.</h2></div></div>
+      <div class="reviews">
+        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Mimi ne buvait que dans le robinet de la salle de bain. Depuis la fontaine Source, elle y passe dix fois par jour. »</blockquote><footer><span class="av" style="background:var(--mint)">C</span>Camille, Nantes · Fontaine Source</footer></article>
+        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Le distributeur m'a sauvé les réveils à 5 h du matin. Oscar attend maintenant 7 h pile devant la machine. »</blockquote><footer><span class="av" style="background:var(--butter)">T</span>Thomas, Lille · Distributeur Horizon</footer></article>
+        <article class="review"><span class="stars"><i>★★★★★</i></span><blockquote>« Le panier Nuage est devenu le trône officiel. Le chien n'a plus le droit d'approcher. »</blockquote><footer><span class="av" style="background:var(--bean-soft)">I</span>Inès, Bordeaux · Panier Nuage</footer></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="news">
+        <h2>–10 % sur votre première commande.</h2>
+        <form id="newsForm" novalidate>
+          <input id="newsEmail" type="email" placeholder="votre@email.fr" aria-label="Adresse e-mail" required>
+          <button class="btn btn-primary" type="submit">Je m'inscris</button>
+          <p class="msg" id="newsMsg" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div><a class="logo" href="#top">ronron</a><p style="max-width:32ch">Accessoires pour chats d'intérieur, sélectionnés et testés à Lyon depuis 2021.</p></div>
+      <div><h4>Boutique</h4><ul><li><a href="#boutique">Fontaines</a></li><li><a href="#boutique">Repas</a></li><li><a href="#boutique">Jeux</a></li><li><a href="#boutique">Couchage</a></li></ul></div>
+      <div><h4>Aide</h4><ul><li><a href="#top">Livraison &amp; retours</a></li><li><a href="#top">Entretien des fontaines</a></li><li><a href="#top">Garantie</a></li><li><a href="#top">Contact</a></li></ul></div>
+      <div><h4>Ronron</h4><ul><li><a href="#engagements">Nos engagements</a></li><li><a href="#avis">Avis clients</a></li><li><a href="#top">Chats-testeurs</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Ronron · Boutique de démonstration</span><span>Paiement sécurisé · CB · PayPal · Apple Pay</span></div>
+  </div>
+</footer>
+
+<!-- Panier -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
+  <div class="drawer-head"><h3 id="drawerTitle">Votre panier</h3><button class="close" style="position:static" data-close aria-label="Fermer le panier">×</button></div>
+  <div class="ship" id="ship"></div>
+  <div class="lines" id="lines"></div>
+  <div class="drawer-foot" id="foot"></div>
+</aside>
+
+<!-- Fiche produit -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" aria-hidden="true">
+  <div class="panel" id="panel"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg><span id="toastTxt"></span>
+</div>
+
+<script>
+(() => {
+  /* ─── Illustrations produit (SVG inline, couleur principale paramétrable) ─── */
+  const ILL = {
+    fountain: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="70" ry="9" fill="#000" opacity=".08"/><path d="M34 110h132l-12 52a10 10 0 0 1-10 8H56a10 10 0 0 1-10-8z" fill="${c}"/><ellipse cx="100" cy="110" rx="66" ry="15" fill="#BFE3FF"/><ellipse cx="100" cy="110" rx="30" ry="6" fill="none" stroke="#fff" stroke-width="2.5"/><rect x="90" y="52" width="20" height="56" rx="7" fill="#fff" opacity=".9"/><rect x="83" y="46" width="34" height="12" rx="6" fill="#1C1A2E"/><path d="M100 64c-4 6-6 9-6 12a6 6 0 0 0 12 0c0-3-2-6-6-12z" fill="#8FD0FF"/><circle cx="100" cy="148" r="4" fill="#1E8C62"/></svg>`,
+    fountainSteel: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="64" ry="9" fill="#000" opacity=".08"/><rect x="40" y="80" width="120" height="90" rx="26" fill="${c}"/><ellipse cx="100" cy="84" rx="56" ry="13" fill="#D9DDE6"/><ellipse cx="100" cy="84" rx="44" ry="9" fill="#BFE3FF"/><path d="M100 50c-8 12-10 18-10 22a10 10 0 0 0 20 0c0-4-2-10-10-22z" fill="#8FD0FF"/><rect x="72" y="128" width="56" height="10" rx="5" fill="#fff" opacity=".6"/><rect x="72" y="128" width="40" height="10" rx="5" fill="#1E8C62"/></svg>`,
+    filter: c => `<svg viewBox="0 0 200 200"><g transform="rotate(-10 100 100)"><rect x="46" y="54" width="70" height="96" rx="10" fill="${c}"/><rect x="56" y="64" width="50" height="76" rx="6" fill="#1C1A2E"/><g stroke="#4A4668" stroke-width="3">${[74,84,94,104,114,124].map(y=>`<path d="M60 ${y}h42"/>`).join('')}</g></g><g transform="rotate(8 120 110)"><rect x="96" y="60" width="70" height="96" rx="10" fill="#fff"/><rect x="106" y="70" width="50" height="76" rx="6" fill="#1C1A2E"/><g stroke="#4A4668" stroke-width="3">${[80,90,100,110,120,130].map(y=>`<path d="M110 ${y}h42"/>`).join('')}</g></g></svg>`,
+    feeder: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="180" rx="60" ry="8" fill="#000" opacity=".08"/><rect x="54" y="26" width="92" height="120" rx="22" fill="${c}"/><rect x="66" y="40" width="68" height="46" rx="12" fill="#fff" opacity=".55"/><circle cx="100" cy="63" r="12" fill="#E8B26A"/><circle cx="92" cy="58" r="5" fill="#C98C42"/><circle cx="106" cy="68" r="5" fill="#C98C42"/><rect x="80" y="100" width="40" height="20" rx="6" fill="#1C1A2E"/><text x="100" y="114.5" font-family="monospace" font-size="11" fill="#9EF0C8" text-anchor="middle">07:00</text><path d="M44 146h112l-8 28H52z" fill="#1C1A2E"/></svg>`,
+    bowl: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="170" rx="72" ry="9" fill="#000" opacity=".08"/><path d="M62 132l-8 36h92l-8-36z" fill="#C9A77C"/><path d="M28 96h144c-4 26-30 42-72 42S32 122 28 96z" fill="${c}"/><ellipse cx="100" cy="96" rx="72" ry="16" fill="#fff"/><ellipse cx="100" cy="98" rx="56" ry="10" fill="#E8B26A"/><circle cx="84" cy="96" r="5" fill="#C98C42"/><circle cx="104" cy="99" r="5" fill="#C98C42"/><circle cx="120" cy="95" r="5" fill="#C98C42"/></svg>`,
+    wand: c => `<svg viewBox="0 0 200 200"><path d="M40 176L130 60" stroke="#C9A77C" stroke-width="8" stroke-linecap="round"/><path d="M130 60c20-10 30-22 30-40" stroke="#1C1A2E" stroke-width="2" fill="none"/><g transform="translate(160 22)"><path d="M0 0c-26 6-36 30-30 56 18-8 34-26 30-56z" fill="${c}"/><path d="M0 0c16 18 18 40 4 62-10-18-12-40-4-62z" fill="#FF9EB0"/><path d="M0 0c-8 22-16 32-10 58" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/></g><circle cx="40" cy="176" r="8" fill="#1C1A2E"/></svg>`,
+    laser: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="56" ry="8" fill="#000" opacity=".08"/><path d="M60 170h80l-10-50H70z" fill="#1C1A2E"/><circle cx="100" cy="92" r="42" fill="${c}"/><circle cx="100" cy="92" r="18" fill="#1C1A2E"/><circle cx="100" cy="92" r="7" fill="#FF4D6D"/><path d="M104 88l70-50" stroke="#FF4D6D" stroke-width="2.5" stroke-dasharray="4 5"/><circle cx="176" cy="36" r="7" fill="#FF4D6D" opacity=".85"/></svg>`,
+    donut: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="162" rx="84" ry="12" fill="#000" opacity=".08"/><ellipse cx="100" cy="116" rx="84" ry="46" fill="${c}"/><ellipse cx="100" cy="108" rx="54" ry="26" fill="#fff" opacity=".35"/><ellipse cx="100" cy="112" rx="50" ry="22" fill="${c}" opacity=".85"/><g stroke="#fff" stroke-width="3" opacity=".6" stroke-linecap="round"><path d="M30 104c4-8 8-12 14-14M160 92c6 2 10 6 14 12M60 146c6 3 12 4 18 4M122 150c8 0 14-2 20-4"/></g></svg>`,
+    hammock: c => `<svg viewBox="0 0 200 200"><rect x="20" y="20" width="160" height="160" rx="16" fill="#BFE3FF" opacity=".5"/><path d="M20 100h160M100 20v160" stroke="#fff" stroke-width="6"/><circle cx="42" cy="66" r="12" fill="#fff" opacity=".9"/><circle cx="158" cy="66" r="12" fill="#fff" opacity=".9"/><path d="M42 66l18 50M158 66l-18 50" stroke="#1C1A2E" stroke-width="3"/><path d="M52 112h96c0 26-22 40-48 40s-48-14-48-40z" fill="${c}"/><path d="M60 114h80" stroke="#fff" stroke-width="3" opacity=".6"/></svg>`,
+    tree: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="184" rx="70" ry="7" fill="#000" opacity=".08"/><rect x="36" y="168" width="128" height="14" rx="6" fill="${c}"/><g fill="#D9BE94"><rect x="56" y="100" width="18" height="70" rx="4"/><rect x="126" y="60" width="18" height="110" rx="4"/><rect x="86" y="36" width="16" height="64" rx="4"/></g><g stroke="#B8986A" stroke-width="2">${[110,120,130,140,150,160].map(y=>`<path d="M56 ${y}h18"/>`).join('')}${[70,82,94,106,118,130,142,154].map(y=>`<path d="M126 ${y}h18"/>`).join('')}</g><rect x="40" y="92" width="62" height="12" rx="6" fill="${c}"/><rect x="112" y="52" width="52" height="12" rx="6" fill="${c}"/><rect x="70" y="26" width="48" height="14" rx="7" fill="${c}"/><circle cx="154" cy="112" r="10" fill="#FF9EB0"/><path d="M154 64v38" stroke="#1C1A2E" stroke-width="1.5"/></svg>`,
+    scratcher: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="168" rx="80" ry="8" fill="#000" opacity=".08"/><path d="M20 150c30-80 130-80 160 0z" fill="${c}"/><g stroke="#fff" stroke-width="3" opacity=".45" fill="none">${[0,1,2,3,4,5].map(i=>`<path d="M${30+i*6} 150c${26-i*1} ${-66+i*10} ${114-i*12} ${-66+i*10} ${140-i*12} 0"/>`).join('')}</g><rect x="16" y="148" width="168" height="10" rx="5" fill="#1C1A2E"/></svg>`,
+    litter: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="176" rx="80" ry="8" fill="#000" opacity=".08"/><path d="M28 170V96a72 60 0 0 1 144 0v74z" fill="${c}"/><path d="M100 50l-10-22M112 52l12-20" stroke="#1C1A2E" stroke-width="4" stroke-linecap="round" opacity=".2"/><ellipse cx="100" cy="126" rx="34" ry="36" fill="#1C1A2E"/><path d="M76 150c8-6 40-6 48 0" stroke="#fff" stroke-width="2" opacity=".3"/><rect x="28" y="160" width="144" height="12" rx="4" fill="#fff" opacity=".5"/></svg>`,
+    brush: c => `<svg viewBox="0 0 200 200"><g transform="rotate(-28 100 100)"><rect x="90" y="108" width="20" height="80" rx="10" fill="#1C1A2E"/><rect x="42" y="30" width="116" height="84" rx="30" fill="${c}"/><g fill="#fff" opacity=".85">${[0,1,2,3,4].flatMap(r=>[0,1,2,3,4,5,6].map(k=>`<circle cx="${58+k*14}" cy="${46+r*14}" r="2.6"/>`)).join('')}</g></g></svg>`,
+    ball: c => `<svg viewBox="0 0 200 200"><ellipse cx="100" cy="174" rx="54" ry="8" fill="#000" opacity=".08"/><circle cx="72" cy="120" r="34" fill="${c}"/><circle cx="136" cy="130" r="26" fill="#FF9EB0"/><circle cx="118" cy="72" r="22" fill="#BFEBDD"/><g fill="none" stroke="#fff" stroke-width="3" opacity=".7"><path d="M44 110c20 10 40 10 56 0"/><path d="M116 124c12 6 26 6 38 0"/><path d="M100 70c10 6 26 6 36 0"/></g><path d="M72 86c-4-14 4-24 14-26" stroke="#1C1A2E" stroke-width="2" fill="none"/><circle cx="87" cy="60" r="4" fill="#F2A51A"/></svg>`,
+  };
+
+  const CATS = [
+    {id:'all', name:'Tout voir', ill:'ball', bg:'--surface-2', color:'#5344F0'},
+    {id:'eau', name:'Fontaines', ill:'fountain', bg:'--sky', color:'#F4F3F8'},
+    {id:'repas', name:'Repas', ill:'bowl', bg:'--butter', color:'#F8F4EC'},
+    {id:'jeux', name:'Jeux', ill:'wand', bg:'--bean-soft', color:'#5344F0'},
+    {id:'dodo', name:'Couchage', ill:'donut', bg:'--lilac', color:'#B9AEFF'},
+    {id:'griffe', name:'Griffoirs', ill:'scratcher', bg:'--mint', color:'#C9A77C'},
+    {id:'hygiene', name:'Hygiène', ill:'litter', bg:'--surface-2', color:'#BFEBDD'},
+  ];
+
+  const P = [
+    {id:'source', cat:'eau', name:'Fontaine Source', kind:'Fontaine céramique', ill:'fountain', bg:'--sky',
+     colors:['#F4F3F8','#BFEBDD','#FFD6DE'], price:69.9, was:79.9, rating:4.9, reviews:1284, badge:'Best-seller', pop:100, isNew:false,
+     spec:'2,5 L · 25 dB · filtre 30 j',
+     desc:"Céramique émaillée qui garde l'eau fraîche, triple filtration (mousse, charbon actif, résine) et pompe immergée ultra silencieuse. Le petit jet en surface attire même les chats les plus méfiants.",
+     facts:[['Capacité','2,5 L (≈ 7 jours pour 1 chat)'],['Bruit','< 25 dB'],['Matière','Céramique émaillée, sans BPA'],['Entretien','Passe au lave-vaisselle']]},
+    {id:'cascade', cat:'eau', name:'Fontaine Cascade', kind:'Fontaine inox sans fil', ill:'fountainSteel', bg:'--mint',
+     colors:['#C7CCD8','#1C1A2E'], price:89, rating:4.8, reviews:412, badge:'Nouveau', pop:88, isNew:true,
+     spec:'3 L · batterie 4 000 mAh',
+     desc:"Pompe sans fil rechargeable par USB-C et capteur de présence : l'eau ne coule que lorsque votre chat s'approche. Jusqu'à 30 jours d'autonomie.",
+     facts:[['Capacité','3 L'],['Autonomie','30 jours en mode capteur'],['Matière','Inox 304 brossé'],['Charge','USB-C, 4 h']]},
+    {id:'filtres', cat:'eau', name:'Filtres charbon × 6', kind:'Consommable', ill:'filter', bg:'--surface-2',
+     colors:['#BFEBDD'], price:14.9, rating:4.9, reviews:936, pop:80, isNew:false,
+     spec:'6 mois de filtration',
+     desc:"Recharges compatibles Source et Cascade. Charbon de coco actif et résine échangeuse d'ions pour retenir poils, calcaire et goût de chlore.",
+     facts:[['Contenu','6 filtres'],['Durée','30 jours chacun'],['Compatibilité','Source, Cascade']]},
+    {id:'horizon', cat:'repas', name:'Distributeur Horizon', kind:'Distributeur connecté', ill:'feeder', bg:'--butter',
+     colors:['#F4F3F8','#1C1A2E'], price:119, rating:4.7, reviews:538, badge:'Connecté', pop:92, isNew:false,
+     spec:'4 L · 10 repas / jour',
+     desc:"Programmez jusqu'à 10 repas par jour depuis l'appli, à la croquette près. Enregistrez votre voix pour appeler votre chat à table, même quand vous n'êtes pas là.",
+     facts:[['Réservoir','4 L de croquettes'],['Précision','Portions de 5 g'],['Alimentation','Secteur + piles de secours'],['Appli','iOS et Android']]},
+    {id:'gamelle', cat:'repas', name:'Gamelle surélevée 15°', kind:'Gamelle céramique', ill:'bowl', bg:'--bean-soft',
+     colors:['#F8F4EC','#5344F0','#FF9EB0'], price:29.9, rating:4.8, reviews:677, pop:78, isNew:false,
+     spec:'Inclinaison 15° · Ø 15 cm',
+     desc:"Surélevée et inclinée pour une posture naturelle, large et peu profonde pour ne pas frotter les moustaches. Pied en hêtre massif.",
+     facts:[['Diamètre','15 cm'],['Hauteur','10 cm'],['Matière','Céramique + hêtre']]},
+    {id:'plume', cat:'jeux', name:'Canne à plumes Rhéa', kind:'Jouet interactif', ill:'wand', bg:'--lilac',
+     colors:['#5344F0','#FFB547'], price:12.5, rating:4.9, reviews:1102, pop:95, isNew:false,
+     spec:'Canne 90 cm · 3 recharges',
+     desc:"Le jouet que tous les chats-testeurs ont réclamé. Plumes naturelles, fil souple qui imite le vol d'un oiseau, trois recharges incluses.",
+     facts:[['Longueur','90 cm'],['Inclus','3 recharges plumes'],['Canne','Bambou']]},
+    {id:'orbite', cat:'jeux', name:'Laser Orbite', kind:'Jouet automatique', ill:'laser', bg:'--surface-2',
+     colors:['#FFE3E8','#BFEBDD'], price:34.9, rating:4.5, reviews:219, badge:'Nouveau', pop:70, isNew:true,
+     spec:'Sessions de 15 min · USB-C',
+     desc:"Trajectoires aléatoires et arrêt automatique après 15 minutes pour éviter la frustration. Laser classe 1, sans danger pour les yeux.",
+     facts:[['Modes','Lent, rapide, aléatoire'],['Sécurité','Laser classe 1'],['Charge','USB-C']]},
+    {id:'balles', cat:'jeux', name:'Balles herbe-à-chat × 3', kind:'Jouet', ill:'ball', bg:'--mint',
+     colors:['#5344F0'], price:9.9, rating:4.6, reviews:388, pop:66, isNew:false,
+     spec:'Laine feutrée · cataire bio',
+     desc:"Balles en laine feutrée garnies de cataire bio française. Légères, silencieuses sur le parquet, parfaites pour les parties de foot nocturnes.",
+     facts:[['Contenu','3 balles'],['Matière','Laine feutrée'],['Garniture','Cataire bio']]},
+    {id:'nuage', cat:'dodo', name:'Panier Nuage', kind:'Panier donut', ill:'donut', bg:'--lilac',
+     colors:['#B9AEFF','#FFD6DE','#E7E3D8'], price:49.9, was:59.9, rating:4.9, reviews:1540, badge:'Best-seller', pop:98, isNew:false,
+     spec:'Ø 60 cm · lavable 30 °C',
+     desc:"Bords rebondis qui soutiennent la tête et fausse fourrure ultra douce : le panier dans lequel on se roule en boule. Déhoussable, lavable en machine.",
+     facts:[['Diamètre','60 cm'],['Lavage','Machine 30 °C'],['Fond','Antidérapant']]},
+    {id:'hamac', cat:'dodo', name:'Hamac de fenêtre', kind:'Couchage', ill:'hammock', bg:'--sky',
+     colors:['#FFB547','#5344F0'], price:39, rating:4.7, reviews:463, pop:84, isNew:false,
+     spec:'Ventouses · supporte 18 kg',
+     desc:"Un poste d'observation avec vue sur les oiseaux. Quatre ventouses renforcées et câbles acier : il tient même un Maine coon.",
+     facts:[['Charge max','18 kg'],['Dimensions','55 × 35 cm'],['Fixation','4 ventouses Ø 8 cm']]},
+    {id:'canopee', cat:'griffe', name:'Arbre à chat Canopée', kind:'Arbre à chat', ill:'tree', bg:'--butter',
+     colors:['#E7E3D8','#5344F0'], price:159, rating:4.8, reviews:301, pop:86, isNew:false,
+     spec:'142 cm · sisal naturel',
+     desc:"Trois plateformes, des poteaux entièrement gainés de sisal naturel et une base lestée qui ne bouge pas, même lors des sprints de 3 h du matin.",
+     facts:[['Hauteur','142 cm'],['Base','60 × 45 cm, lestée'],['Poteaux','Sisal naturel Ø 9 cm']]},
+    {id:'vague', cat:'griffe', name:'Griffoir Vague', kind:'Griffoir carton', ill:'scratcher', bg:'--mint',
+     colors:['#C9A77C'], price:24.9, rating:4.7, reviews:590, pop:74, isNew:false,
+     spec:'Carton recyclé · réversible',
+     desc:"Griffoir en carton ondulé recyclé, courbé pour s'y allonger. Réversible : quand une face est usée, on le retourne.",
+     facts:[['Longueur','58 cm'],['Matière','Carton recyclé, colle d\'amidon'],['Bonus','Sachet de cataire offert']]},
+    {id:'nid', cat:'hygiene', name:'Maison de toilette Nid', kind:'Bac à litière', ill:'litter', bg:'--bean-soft',
+     colors:['#BFEBDD','#F4F3F8'], price:79, rating:4.6, reviews:244, badge:'Nouveau', pop:72, isNew:true,
+     spec:'Filtre anti-odeurs · 50 cm',
+     desc:"Forme arrondie qui se fond dans le salon, filtre charbon anti-odeurs et tiroir coulissant pour un nettoyage sans se baisser.",
+     facts:[['Dimensions','50 × 40 × 44 cm'],['Filtre','Charbon actif'],['Accès','Porte battante amovible']]},
+    {id:'brosse', cat:'hygiene', name:'Brosse autonettoyante', kind:'Toilettage', ill:'brush', bg:'--sky',
+     colors:['#5344F0','#FF9EB0'], price:19.9, rating:4.8, reviews:812, pop:82, isNew:false,
+     spec:'Picots arrondis · 1 clic',
+     desc:"Des picots arrondis qui massent sans griffer. Un clic et tous les poils se détachent d'un bloc — fini la brosse à nettoyer à la main.",
+     facts:[['Picots','Inox à bout arrondi'],['Pelage','Court et mi-long'],['Nettoyage','Bouton rétractable']]},
+  ];
+
+  const $ = s => document.querySelector(s);
+  const euro = n => n.toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+  const FREE_SHIP = 49, SHIP_COST = 4.9;
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem('ronron:'+k); return v ? JSON.parse(v) : d; }catch{ return d; } },
+    set(k,v){ try{ localStorage.setItem('ronron:'+k, JSON.stringify(v)); }catch{} }
+  };
+  const byId = id => P.find(p => p.id === id);
+
+  let state = {
+    cat: 'all', q: '', sort: 'pop',
+    cart: store.get('cart', [{id:'source',qty:1,color:0},{id:'plume',qty:2,color:0}]),
+    favs: new Set(store.get('favs', ['nuage'])),
+    favOnly: false,
+  };
+  state.cart = state.cart.filter(l => byId(l.id));
+
+  /* ─── Ticker ─── */
+  const tick = ['Eau filtrée en continu','Livraison offerte dès 49 €','Testé par 14 chats','Céramique sans BPA','Retours 30 jours','Garantie 2 ans'];
+  $('#ticker').innerHTML = [...tick,...tick].map(t=>`<span>${t}</span>`).join('');
+
+  /* ─── Catégories ─── */
+  function renderCats(){
+    $('#cats').innerHTML = CATS.filter(c=>c.id!=='all').concat(CATS[0]).map(c => {
+      const n = c.id==='all' ? P.length : P.filter(p=>p.cat===c.id).length;
+      return `<button class="cat-tile" data-cat="${c.id}" aria-pressed="${state.cat===c.id && !state.favOnly}">
+        <span class="ill" style="background:var(${c.bg})">${ILL[c.ill](c.color)}</span>
+        <b>${c.name}</b><small>${n} produit${n>1?'s':''}</small></button>`;
+    }).join('');
+  }
+  $('#cats').addEventListener('click', e => {
+    const b = e.target.closest('[data-cat]'); if(!b) return;
+    state.cat = b.dataset.cat; state.favOnly = false; renderCats(); renderGrid();
+  });
+
+  /* ─── Grille ─── */
+  const stars = r => '★★★★★'.slice(0, Math.round(r));
+  function renderGrid(){
+    const q = state.q.trim().toLowerCase();
+    let list = P.filter(p => (state.favOnly ? state.favs.has(p.id) : (state.cat==='all' || p.cat===state.cat))
+      && (!q || (p.name+' '+p.kind+' '+p.desc).toLowerCase().includes(q)));
+    const s = {pop:(a,b)=>b.pop-a.pop, asc:(a,b)=>a.price-b.price, desc:(a,b)=>b.price-a.price, new:(a,b)=>(b.isNew-a.isNew)||(b.pop-a.pop)}[state.sort];
+    list.sort(s);
+    $('#results').textContent = state.favOnly ? `${list.length} favori${list.length>1?'s':''}` : `${list.length} produit${list.length>1?'s':''}`;
+    $('#grid').innerHTML = list.length ? list.map(p => `
+      <article class="card">
+        <button class="media" style="background:var(${p.bg})" data-open="${p.id}" aria-label="Voir ${p.name}">${ILL[p.ill](p.colors[0])}</button>
+        ${p.badge ? `<span class="badge ${p.isNew?'new':''}">${p.badge}</span>` : ''}
+        <button class="fav" data-fav="${p.id}" aria-pressed="${state.favs.has(p.id)}" aria-label="Ajouter ${p.name} aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-9A5 5 0 0 1 12 6a5 5 0 0 1 9.2 5C19 15.6 12 20 12 20z"/></svg></button>
+        <div class="body">
+          <span class="kind">${p.kind}</span>
+          <h3>${p.name}</h3>
+          <span class="spec">${p.spec}</span>
+          <span class="stars"><i>${stars(p.rating)}</i>${p.rating.toLocaleString('fr-FR')} · ${p.reviews.toLocaleString('fr-FR')} avis</span>
+          <div class="foot">
+            <span class="price">${euro(p.price)}${p.was?`<s>${euro(p.was)}</s>`:''}</span>
+            <button class="add" data-add="${p.id}" aria-label="Ajouter ${p.name} au panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </article>`).join('')
+      : `<p class="empty">${state.favOnly ? 'Aucun favori pour l\'instant — touchez le cœur d\'un produit pour le garder ici.' : `Aucun produit ne correspond à « ${state.q.replace(/</g,'&lt;')} ». Essayez « fontaine » ou « jouet ».`}</p>`;
+  }
+  $('#q').addEventListener('input', e => { state.q = e.target.value; renderGrid(); });
+  $('#sort').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
+
+  /* ─── Favoris ─── */
+  function toggleFav(id){
+    state.favs.has(id) ? state.favs.delete(id) : state.favs.add(id);
+    store.set('favs',[...state.favs]); updateCounts(); renderGrid();
+    toast(state.favs.has(id) ? `${byId(id).name} ajouté aux favoris` : 'Retiré des favoris');
+  }
+  $('#favBtn').addEventListener('click', () => {
+    state.favOnly = !state.favOnly; state.q=''; $('#q').value='';
+    renderCats(); renderGrid(); $('#boutique').scrollIntoView();
+  });
+
+  /* ─── Panier ─── */
+  function addToCart(id, qty=1, color=0){
+    const l = state.cart.find(x => x.id===id && x.color===color);
+    l ? l.qty += qty : state.cart.push({id,qty,color});
+    saveCart(); toast(`${byId(id).name} ajouté au panier`); bump('#cartCount');
+  }
+  function saveCart(){ store.set('cart', state.cart); updateCounts(); renderCart(); }
+  const subtotal = () => state.cart.reduce((s,l)=>s+byId(l.id).price*l.qty,0);
+  function updateCounts(){
+    $('#cartCount').textContent = state.cart.reduce((s,l)=>s+l.qty,0);
+    $('#favCount').textContent = state.favs.size;
+  }
+  function bump(sel){ const el=$(sel); el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); setTimeout(()=>el.classList.remove('bump'),250); }
+
+  let checkoutStep = 'cart';
+  function renderCart(){
+    const sub = subtotal(), left = Math.max(0, FREE_SHIP - sub);
+    const ship = sub===0 || left===0 ? 0 : SHIP_COST;
+    $('#ship').innerHTML = sub===0 ? 'Livraison offerte dès 49 € d\'achat.'
+      : left>0 ? `Plus que <b>${euro(left)}</b> pour la livraison offerte.<div class="bar"><i style="width:${Math.min(100,sub/FREE_SHIP*100)}%"></i></div>`
+      : `<b style="color:var(--ok)">Livraison offerte</b> — votre chat vous remercie.<div class="bar"><i style="width:100%"></i></div>`;
+    $('#ship').hidden = checkoutStep==='done';
+
+    if (checkoutStep==='done'){ return; }
+    if (!state.cart.length){
+      $('#lines').innerHTML = `<div class="cart-empty">${ILL.donut('#B9AEFF')}<p>Votre panier est vide.<br>Le panier Nuage, lui, est plein de poils.</p></div>`;
+      $('#foot').innerHTML = `<button class="btn btn-primary" data-close>Continuer mes achats</button>`;
+      return;
+    }
+    if (checkoutStep==='form'){
+      $('#lines').innerHTML = `<form class="checkout" id="coForm" novalidate>
+        <p class="eyebrow" style="margin:12px 0 4px">Livraison</p>
+        <label for="coName">Nom complet<input id="coName" autocomplete="name" required value="Camille Martin"></label>
+        <label for="coAddr">Adresse<input id="coAddr" autocomplete="street-address" required value="12 rue des Chartreux"></label>
+        <div class="two"><label for="coZip">Code postal<input id="coZip" inputmode="numeric" required value="69001"></label><label for="coCity">Ville<input id="coCity" required value="Lyon"></label></div>
+        <label for="coMail">E-mail<input id="coMail" type="email" autocomplete="email" required placeholder="vous@email.fr"></label>
+        <p class="eyebrow" style="margin:12px 0 4px">Paiement (démo)</p>
+        <label for="coCard">Numéro de carte<input id="coCard" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="off"></label>
+        <p id="coErr" style="color:#D6334F;font-size:14px;margin:0" aria-live="polite"></p>
+      </form>`;
+    } else {
+      $('#lines').innerHTML = state.cart.map((l,i) => { const p=byId(l.id); return `
+        <div class="line">
+          <span class="thumb" style="background:var(${p.bg})">${ILL[p.ill](p.colors[l.color]||p.colors[0])}</span>
+          <div><b>${p.name}</b><small>${p.spec}</small><br>
+            <span class="qty"><button data-dec="${i}" aria-label="Retirer un">−</button><span>${l.qty}</span><button data-inc="${i}" aria-label="Ajouter un">+</button></span></div>
+          <div class="lp">${euro(p.price*l.qty)}<button class="rm" data-rm="${i}">Retirer</button></div>
+        </div>`; }).join('');
+    }
+    $('#foot').innerHTML = `
+      <div class="row"><span>Sous-total</span><span>${euro(sub)}</span></div>
+      <div class="row"><span>Livraison</span><span>${ship ? euro(ship) : 'Offerte'}</span></div>
+      <div class="row total"><span>Total</span><span>${euro(sub+ship)}</span></div>
+      ${checkoutStep==='form'
+        ? `<button class="btn btn-primary" data-pay>Payer ${euro(sub+ship)}</button><button class="btn btn-ghost" data-back>Retour au panier</button>`
+        : `<button class="btn btn-primary" data-checkout>Commander</button>`}`;
+  }
+  const drawer = $('#drawer'), scrim = $('#scrim'), modal = $('#modal');
+  function openCart(){ checkoutStep = checkoutStep==='done' ? 'cart' : checkoutStep; $('#drawerTitle').textContent='Votre panier'; renderCart(); drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden','false'); }
+  function closeAll(){ drawer.classList.remove('on'); modal.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden','true'); modal.setAttribute('aria-hidden','true'); if(checkoutStep==='done') checkoutStep='cart'; }
+  $('#cartBtn').addEventListener('click', openCart);
+  scrim.addEventListener('click', closeAll);
+  modal.addEventListener('click', e => { if(e.target===modal) closeAll(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeAll(); });
+
+  drawer.addEventListener('click', e => {
+    const t = e.target.closest('button'); if(!t) return;
+    const d = t.dataset;
+    if ('close' in d) return closeAll();
+    if (d.inc) { state.cart[+d.inc].qty++; saveCart(); }
+    if (d.dec) { const l = state.cart[+d.dec]; l.qty--; if(!l.qty) state.cart.splice(+d.dec,1); saveCart(); }
+    if (d.rm)  { state.cart.splice(+d.rm,1); saveCart(); }
+    if ('checkout' in d) { checkoutStep='form'; $('#drawerTitle').textContent='Livraison'; renderCart(); }
+    if ('back' in d) { checkoutStep='cart'; $('#drawerTitle').textContent='Votre panier'; renderCart(); }
+    if ('pay' in d) {
+      const req = ['coName','coAddr','coZip','coCity','coMail'].map(id=>$('#'+id));
+      const bad = req.find(i => !i.value.trim() || (i.type==='email' && !/^\S+@\S+\.\S+$/.test(i.value)));
+      if (bad){ $('#coErr').textContent = bad.id==='coMail' ? 'Indiquez une adresse e-mail valide pour recevoir le suivi.' : 'Complétez ce champ pour qu\'on sache où livrer.'; bad.focus(); return; }
+      const total = subtotal() + (subtotal()>=FREE_SHIP?0:SHIP_COST);
+      const num = 'RR-' + Math.floor(100000 + Math.random()*900000);
+      checkoutStep='done'; state.cart=[]; store.set('cart',[]); updateCounts();
+      $('#drawerTitle').textContent='Merci !'; $('#ship').hidden=true;
+      $('#lines').innerHTML = `<div class="ok-box">${ILL.fountain('#F4F3F8')}<h4>Commande confirmée</h4><p>Commande <code>${num}</code> de ${euro(total)}.<br>Expédition aujourd'hui depuis Lyon. (Boutique de démonstration : aucun paiement n'a été prélevé.)</p></div>`;
+      $('#foot').innerHTML = `<button class="btn btn-primary" data-close>Retour à la boutique</button>`;
+    }
+  });
+
+  /* ─── Fiche produit ─── */
+  function openProduct(id){
+    const p = byId(id); let qty = 1, color = 0;
+    const draw = () => {
+      $('#panel').innerHTML = `
+        <div class="pic" style="background:var(${p.bg})">${ILL[p.ill](p.colors[color])}${p.badge?`<span class="badge ${p.isNew?'new':''}">${p.badge}</span>`:''}</div>
+        <div class="info">
+          <button class="close" data-x aria-label="Fermer">×</button>
+          <span class="eyebrow">${p.kind}</span>
+          <h3 id="mTitle">${p.name}</h3>
+          <span class="stars"><i>${stars(p.rating)}</i>${p.rating.toLocaleString('fr-FR')} · ${p.reviews.toLocaleString('fr-FR')} avis vérifiés</span>
+          <span class="price">${euro(p.price)}${p.was?`<s>${euro(p.was)}</s>`:''}</span>
+          <p class="desc">${p.desc}</p>
+          <dl>${p.facts.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+          ${p.colors.length>1?`<div><span class="eyebrow">Coloris</span><div class="swatches" style="margin-top:8px">${p.colors.map((c,i)=>`<button style="background:${c}" data-sw="${i}" aria-pressed="${i===color}" aria-label="Coloris ${i+1}"></button>`).join('')}</div></div>`:''}
+          <div class="buy">
+            <span class="qty"><button data-q="-1" aria-label="Moins">−</button><span>${qty}</span><button data-q="1" aria-label="Plus">+</button></span>
+            <button class="btn btn-primary" data-buy>Ajouter · ${euro(p.price*qty)}</button>
+          </div>
+        </div>`;
+    };
+    draw();
+    $('#panel').onclick = e => {
+      const t = e.target.closest('button'); if(!t) return;
+      if ('x' in t.dataset) return closeAll();
+      if (t.dataset.sw) { color = +t.dataset.sw; draw(); }
+      if (t.dataset.q)  { qty = Math.max(1, qty + +t.dataset.q); draw(); }
+      if ('buy' in t.dataset) { addToCart(p.id, qty, color); closeAll(); }
+    };
+    modal.classList.add('on'); scrim.classList.add('on'); modal.setAttribute('aria-hidden','false');
+    setTimeout(()=>$('#panel .close')?.focus(), 50);
+  }
+
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-open],[data-add],[data-fav]'); if(!t || drawer.contains(t)) return;
+    if (t.dataset.open) openProduct(t.dataset.open);
+    if (t.dataset.add) addToCart(t.dataset.add);
+    if (t.dataset.fav) toggleFav(t.dataset.fav);
+  });
+
+  /* ─── Newsletter ─── */
+  $('#newsForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = $('#newsEmail').value.trim();
+    const m = $('#newsMsg');
+    if (!/^\S+@\S+\.\S+$/.test(v)){ m.style.color='#D6334F'; m.textContent='Cette adresse ne semble pas valide — vérifiez le @ et le domaine.'; return; }
+    m.style.color=''; m.textContent = `C'est noté ! Votre code BIENVENUE10 est prêt pour ${v}.`; $('#newsEmail').value='';
+  });
+
+  /* ─── Toast ─── */
+  let tt; function toast(msg){ $('#toastTxt').textContent = msg; $('#toast').classList.add('on'); clearTimeout(tt); tt = setTimeout(()=>$('#toast').classList.remove('on'), 2200); }
+
+  /* ─── Le chat du hero suit le curseur des yeux ─── */
+  const cat = $('#heroCat');
+  const pupils = [...cat.querySelectorAll('.pupil')], glints = [...cat.querySelectorAll('.glint')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    const base = pupils.map(p => [+p.getAttribute('cx'), +p.getAttribute('cy')]);
+    addEventListener('pointermove', e => {
+      const r = cat.getBoundingClientRect(); if (!r.width) return;
+      const sx = 400 / r.width;
+      pupils.forEach((p,i) => {
+        const [cx,cy] = base[i];
+        const dx = (e.clientX - r.left)*sx - cx, dy = (e.clientY - r.top)*sx - cy;
+        const d = Math.hypot(dx,dy) || 1, k = Math.min(1, d/300);
+        const ox = dx/d*12*k, oy = dy/d*6*k;
+        p.setAttribute('cx', cx+ox); p.setAttribute('cy', cy+oy);
+        glints[i].setAttribute('cx', cx+7+ox*.6); glints[i].setAttribute('cy', cy-10+oy*.6);
+      });
+    }, {passive:true});
+    // clignement d'yeux
+    setInterval(() => {
+      pupils.forEach(p => p.animate([{transform:'scaleY(1)'},{transform:'scaleY(.1)'},{transform:'scaleY(1)'}],{duration:220,transformOrigin:'center'}));
+    }, 4200);
+    pupils.forEach(p => { p.style.transformBox='fill-box'; p.style.transformOrigin='center'; });
+  }
+
+  renderCats(); renderGrid(); updateCounts(); renderCart();
+})();
+</script>
+</body>
+</html>
